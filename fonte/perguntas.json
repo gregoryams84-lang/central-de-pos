@@ -1,21 +1,21 @@
 {
-  "_fonte": "Validade e carga horária: Resolução CNE/CES nº 1/2018, art. 2º §1º, art. 7º I e art. 8º §3º e §4º (conferida em 26/10/2026). Ordem e escolha: pesquisa de conversão de 26/10 (research_notes/site_conversao). {{INSTITUICAO}}, {{RAZAO}} e {{CNPJ}} vêm de config.json.",
+  "_fonte": "Ritmos: FAQ oficial de planos e preços (jul/2026) e regulamento do Outubro da Pós (10, 6 ou 4 meses). Validade e carga horária: Resolução CNE/CES nº 1/2018, art. 2º §1º, art. 7º I e art. 8º §3º e §4º (conferida em 26/10/2026). Sem preço fixo aqui: o valor da campanha fica em campanha.json, que sai do ar sozinho.",
   "perguntas": [
     {
-      "pergunta": "Isso é golpe?",
-      "resposta": "Não. Somos um polo parceiro da Anhanguera, da empresa {{RAZAO}}, CNPJ {{CNPJ}}. O curso e o certificado são da {{INSTITUICAO}}, e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."
+      "pergunta": "Em quanto tempo eu termino a pós?",
+      "resposta": "Você escolhe o ritmo: Superintensivo, em 4 meses; Intensivo, em 6 meses; ou EAD, em 10 a 12 meses. O conteúdo é o mesmo, muda só o tempo para concluir. Nem todo curso tem os três ritmos: o especialista mostra os do seu."
     },
     {
-      "pergunta": "Serve para concurso?",
-      "resposta": "Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o especialista conferir antes de escolher o curso."
-    },
-    {
-      "pergunta": "Quanto tempo leva?",
-      "resposta": "Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O especialista mostra os ritmos que a sua pós tem."
+      "pergunta": "Quanto custa?",
+      "resposta": "Depende do curso, da categoria e do ritmo escolhido. O especialista passa o valor exato e o total por escrito antes da matrícula, já com as condições da campanha do mês."
     },
     {
       "pergunta": "Pós EAD tem validade?",
       "resposta": "Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."
+    },
+    {
+      "pergunta": "Serve para concurso?",
+      "resposta": "Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o especialista conferir antes de escolher o curso."
     },
     {
       "pergunta": "Como é a matrícula?",

@@ -30,6 +30,13 @@ for (const pagina of paginas) {
     for (const n of numeros) assert.equal(n, config.whatsapp);
   });
 
+  if (!links.includes(pagina)) {
+    test(`${pagina}: rodapé com o nome e o CNPJ da empresa, sem endereço`, () => {
+      const dados = ler(pagina).match(/<p class="rodape__dados">(.*?)<\/p>/)[1];
+      assert.equal(dados, `<strong>${config.empresa.razao}</strong> · CNPJ ${config.empresa.cnpj}`);
+    });
+  }
+
   test(`${pagina}: sem frase proibida de educação regulada`, () => {
     // Pós lato sensu não tem "reconhecimento" por curso; e nada de promessa de emprego ou salário.
     assert.doesNotMatch(visivel(ler(pagina)), /reconhecid[oa] pelo MEC|garant\w* (de )?(emprego|vaga|salário|aprovação)/i);
