@@ -1,0 +1,11 @@
+{
+  "whatsapp": "5519992467847",
+  "registroCliques": "",
+  "links": [
+    { "caminho": "instagram", "codigo": "IG00" },
+    { "caminho": "facebook", "codigo": "FB00" },
+    { "caminho": "tiktok", "codigo": "TT00" },
+    { "caminho": "kwai", "codigo": "KW00" },
+    { "caminho": "youtube", "codigo": "YT00" }
+  ]
+}

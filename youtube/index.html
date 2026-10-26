@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Central de Pós · Polo Anhanguera</title>
+<meta name="robots" content="noindex">
+<noscript><meta http-equiv="refresh" content="0; url=https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20YouTube%20e%20quero%20saber%20da%20p%C3%B3s%20(YT00)"></noscript>
+<script>
+/* Monta o link do WhatsApp do Manoel a partir do código da página e do ?c= da URL.
+   O gerador embute este arquivo em cada página de link curto, para o redirecionamento
+   não esperar o download de outro arquivo. */
+var LINK_CURTO = (function () {
+  var REDES = { IG: 'Instagram', FB: 'Facebook', TT: 'TikTok', KW: 'Kwai', YT: 'YouTube' };
+  // Vídeo: rede + número com 2 dígitos (00 = bio). Palavra-chave: resposta automática do direct/Messenger.
+  var CODIGO_VIDEO = /^(IG|FB|TT|KW|YT)(\d{2})$/;
+  var CODIGO_PALAVRA = /^(IG|FB)(POS|MBA|CONCURSO|CARREIRA)$/;
+
+  function codigoValido(c) {
+    c = String(c || '').trim().toUpperCase();
+    return CODIGO_VIDEO.test(c) || CODIGO_PALAVRA.test(c) ? c : '';
+  }
+
+  function mensagem(codigo) {
+    var rede = REDES[codigo.slice(0, 2)];
+    var video = CODIGO_VIDEO.exec(codigo);
+    if (video && video[2] !== '00') {
+      return 'Oi! Vi o vídeo no ' + rede + ' e quero saber da pós (' + codigo + ')';
+    }
+    return 'Oi! Vim pelo ' + rede + ' e quero saber da pós (' + codigo + ')';
+  }
+
+  function destino(numero, codigoPadrao, search) {
+    var c = '';
+    try { c = codigoValido(new URLSearchParams(search).get('c')); } catch (e) { /* navegador antigo: fica o padrão */ }
+    var codigo = c || codigoPadrao;
+    return { codigo: codigo, url: 'https://wa.me/' + numero + '?text=' + encodeURIComponent(mensagem(codigo)) };
+  }
+
+  return { codigoValido: codigoValido, mensagem: mensagem, destino: destino };
+})();
+(function () {
+  var d = LINK_CURTO.destino('5519992467847', 'YT00', location.search);
+  var registro = '';
+  if (registro && navigator.sendBeacon) {
+    // O clique vai para a planilha sem segurar o redirecionamento: se falhar, a pessoa chega no WhatsApp igual.
+    var dados = JSON.stringify({ tipo: 'clique', rede: 'youtube', codigo: d.codigo, pagina: location.pathname + location.search, quando: new Date().toISOString() });
+    try { navigator.sendBeacon(registro, new Blob([dados], { type: 'text/plain;charset=utf-8' })); } catch (e) {}
+  }
+  try { localStorage.setItem('cp_ultimo_codigo', JSON.stringify({ c: d.codigo, em: Date.now() })); } catch (e) {}
+  window.__destino = d.url;
+  location.replace(d.url);
+})();
+</script>
+<style>body{margin:0;background:#FCFCFC;color:#1D1D1D;font:18px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding:32px 20px}a{color:#F94D12;font-weight:700}</style>
+</head>
+<body>
+<p>Abrindo o WhatsApp da Central de Pós… Se não abrir sozinho, <a id="link" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20YouTube%20e%20quero%20saber%20da%20p%C3%B3s%20(YT00)">toque aqui</a>.</p>
+<script>try { document.getElementById('link').href = window.__destino; } catch (e) {}</script>
+</body>
+</html>

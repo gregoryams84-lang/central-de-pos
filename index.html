@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Central de Pós · Polo Anhanguera</title>
+<meta name="description" content="Pós-graduação 100% online para todo o Brasil, com atendimento humano pelo WhatsApp. Central de Pós · Polo Anhanguera.">
+<!-- Página provisória até o site da pós ficar pronto: fora da busca por enquanto. -->
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --laranja: #F94D12;
+    --laranja-forte: #D63E0B;
+    --texto: #1D1D1D;
+    --texto-suave: #5A5A5A;
+    --fundo: #FCFCFC;
+    --linha: #E6E6E6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.6;
+  }
+  main { flex: 1; width: 100%; max-width: 640px; margin: 0 auto; padding: 56px 20px 40px; }
+  .marca { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; margin: 0 0 40px; }
+  .marca span { color: var(--laranja); }
+  .rotulo { font-size: 0.85rem; font-weight: 600; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
+  h1 { font-size: clamp(1.75rem, 6vw, 2.4rem); line-height: 1.2; margin: 0 0 16px; font-weight: 700; }
+  p.sub { font-size: 1.05rem; color: var(--texto-suave); margin: 0 0 32px; }
+  .botao {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; max-width: 360px; min-height: 56px; padding: 14px 24px;
+    background: var(--laranja); color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 1.05rem; border-radius: 12px;
+    transition: background-color 0.2s ease;
+  }
+  .botao:hover, .botao:focus-visible { background: var(--laranja-forte); }
+  .botao:focus-visible { outline: 3px solid var(--texto); outline-offset: 3px; }
+  .nota { font-size: 0.9rem; color: var(--texto-suave); margin: 14px 0 0; }
+  footer { border-top: 1px solid var(--linha); padding: 20px; font-size: 0.8rem; color: var(--texto-suave); text-align: center; }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<main>
+  <p class="marca">Central de Pós <span>·</span> Polo Anhanguera</p>
+  <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
+  <h1>Sua pós-graduação começa com uma conversa.</h1>
+  <p class="sub">Fale com o Manoel, especialista em pós, pelo WhatsApp. Ele tira suas dúvidas e indica o curso certo para o seu objetivo. Atendimento humano, do começo ao fim.</p>
+  <a class="botao" id="whatsapp" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">Falar com o Manoel no WhatsApp</a>
+  <p class="nota">Tudo online: você não precisa ir a lugar nenhum.</p>
+</main>
+<footer>
+  <p>Central de Pós · Polo Anhanguera · polo parceiro da Anhanguera</p>
+  <p>AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
+</footer>
+<script>
+  // Quem já passou por um link curto (ex.: /kwai?c=KW07) mantém o código na conversa.
+  (function () {
+    try {
+      var salvo = JSON.parse(localStorage.getItem('cp_ultimo_codigo') || 'null');
+      var trintaDias = 30 * 24 * 60 * 60 * 1000;
+      if (!salvo || !salvo.c || !/^[A-Z]{2}[A-Z0-9]{2,8}$/.test(salvo.c) || Date.now() - salvo.em > trintaDias) return;
+      var msg = 'Oi! Vim pelo site e quero saber da pós (' + salvo.c + ')';
+      document.getElementById('whatsapp').href = 'https://wa.me/5519992467847?text=' + encodeURIComponent(msg);
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>

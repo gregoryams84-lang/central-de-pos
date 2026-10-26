@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Central de Pós · Polo Anhanguera</title>
+<meta name="robots" content="noindex">
+<noscript><meta http-equiv="refresh" content="0; url={{URL_PADRAO}}"></noscript>
+<script>
+{{LOGICA}}
+(function () {
+  var d = LINK_CURTO.destino('{{WHATSAPP}}', '{{CODIGO}}', location.search);
+  var registro = '{{REGISTRO}}';
+  if (registro && navigator.sendBeacon) {
+    // O clique vai para a planilha sem segurar o redirecionamento: se falhar, a pessoa chega no WhatsApp igual.
+    var dados = JSON.stringify({ tipo: 'clique', rede: '{{CAMINHO}}', codigo: d.codigo, pagina: location.pathname + location.search, quando: new Date().toISOString() });
+    try { navigator.sendBeacon(registro, new Blob([dados], { type: 'text/plain;charset=utf-8' })); } catch (e) {}
+  }
+  try { localStorage.setItem('cp_ultimo_codigo', JSON.stringify({ c: d.codigo, em: Date.now() })); } catch (e) {}
+  window.__destino = d.url;
+  location.replace(d.url);
+})();
+</script>
+<style>body{margin:0;background:#FCFCFC;color:#1D1D1D;font:18px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding:32px 20px}a{color:#F94D12;font-weight:700}</style>
+</head>
+<body>
+<p>Abrindo o WhatsApp da Central de Pós… Se não abrir sozinho, <a id="link" href="{{URL_PADRAO}}">toque aqui</a>.</p>
+<script>try { document.getElementById('link').href = window.__destino; } catch (e) {}</script>
+</body>
+</html>
