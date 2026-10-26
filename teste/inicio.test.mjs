@@ -145,11 +145,11 @@ test('o selo da campanha sai do ar sozinho depois do fim', () => {
   assert.equal(abrir(html, { agora: ANTES_DO_FIM }).selos[0].removido, false);
   assert.equal(abrir(html, { agora: DEPOIS_DO_FIM }).selos[0].removido, true);
   // E o gerador nem coloca o selo se rodar depois do fim.
-  assert.doesNotMatch(montarInicio(config, conteudo, new Date(DEPOIS_DO_FIM)), /class="selo"/);
+  assert.doesNotMatch(montarInicio(config, conteudo, new Date(DEPOIS_DO_FIM)), /data-fim="/);
 });
 
 test('"grátis" só aparece com a regra de liberação ao lado', () => {
-  const selo = html.match(/<div class="selo"[\s\S]*?<\/div>\s*<\/div>/)[0];
+  const selo = html.match(/<div class="campanha"[\s\S]*?<\/div>\s*<\/div>/)[0];
   assert.match(selo, /grátis\*/);
   assert.match(selo, /\* A 2ª pós EAD, de valor igual ou menor, é liberada conforme o regulamento/);
   assert.match(selo, /\*\* Categoria Tradicional/);
@@ -157,9 +157,9 @@ test('"grátis" só aparece com a regra de liberação ao lado', () => {
 
 test('o selo conta os dias que faltam pelo calendário de Brasília', () => {
   const faltam = (quando) => abrir(html, { agora: Date.parse(quando) }).selos[0].faltam.textContent;
-  assert.equal(faltam('2026-10-26T12:00:00-03:00'), 'faltam 7 dias · até 02/11, 23h59');
-  assert.equal(faltam('2026-10-26T23:30:00-03:00'), 'faltam 7 dias · até 02/11, 23h59');
-  assert.equal(faltam('2026-11-01T00:10:00-03:00'), 'termina amanhã, 02/11, às 23h59');
+  assert.equal(faltam('2026-10-26T12:00:00-03:00'), 'faltam 7 dias');
+  assert.equal(faltam('2026-10-26T23:30:00-03:00'), 'faltam 7 dias');
+  assert.equal(faltam('2026-11-01T00:10:00-03:00'), 'termina amanhã');
   assert.equal(faltam('2026-11-02T08:00:00-03:00'), 'termina hoje às 23h59');
   assert.equal(faltam('2026-11-02T23:58:00-03:00'), 'termina hoje às 23h59');
 });
@@ -169,15 +169,25 @@ test('o horário diz se o atendimento está aberto agora ou quando o Manoel volt
   const segundaCedo = situacao('2026-10-26T10:00:00-03:00'); // 26/10/2026 é segunda
   assert.equal(segundaCedo.horario.textContent, 'Atendimento aberto agora, até as 19h');
   assert.deepEqual(segundaCedo.classesHorario, ['atendente__horario--aberto']);
-  assert.equal(situacao('2026-10-26T07:30:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde hoje a partir das 8h');
+  assert.equal(situacao('2026-10-26T07:30:00-03:00').horario.textContent, 'Pode mandar: responde hoje a partir das 8h');
   const segundaNoite = situacao('2026-10-26T19:00:00-03:00');
-  assert.equal(segundaNoite.horario.textContent, 'Pode mandar: o Manoel responde amanhã a partir das 8h');
+  assert.equal(segundaNoite.horario.textContent, 'Pode mandar: responde amanhã a partir das 8h');
   assert.deepEqual(segundaNoite.classesHorario, []);
-  assert.equal(situacao('2026-10-31T20:00:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde na segunda a partir das 8h');
-  assert.equal(situacao('2026-11-01T12:00:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde amanhã a partir das 8h');
+  assert.equal(situacao('2026-10-31T20:00:00-03:00').horario.textContent, 'Pode mandar: responde na segunda a partir das 8h');
+  assert.equal(situacao('2026-11-01T12:00:00-03:00').horario.textContent, 'Pode mandar: responde amanhã a partir das 8h');
 });
 
 test('sem JS, o horário sai por extenso e a instituição aparece no topo', () => {
   assert.match(html, /<span data-horario>Atendimento de segunda a sábado, das 8h às 19h<\/span>/);
   assert.match(html, /Curso e certificado da Universidade Anhanguera-Uniderp/);
+});
+
+test('o nome do atendente aparece uma vez só no texto da página', () => {
+  const visivel = html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
+  assert.equal((visivel.match(/Manoel/g) || []).length, 1);
+});
+
+test('o selo da campanha tem a etiqueta com prazo e os itens com a regra e a hora do fim', () => {
+  assert.match(html, /<p class="campanha__prazo">Até 02\/11\/2026, às 23h59 \(horário de Brasília\)<\/p>/);
+  assert.equal((html.match(/<div class="(selo-tag|campanha)" data-fim="2026-11-02T23:59:00-03:00">/g) || []).length, 2);
 });

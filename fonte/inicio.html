@@ -1,10 +1,17 @@
 <main>
-  <section class="heroi">
-    <div class="dentro">
-      <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
+  <section class="banner">
+    <svg class="banner__geo" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+      <path d="M40 430 270 40 500 430Z" fill="none" stroke="#FFFFFF" stroke-opacity=".09" stroke-width="2"/>
+      <path d="M150 430 270 226 390 430Z" fill="none" stroke="#EDCF9F" stroke-opacity=".22" stroke-width="1.5"/>
+      <path d="M-30 330 430 60" stroke="#FFFFFF" stroke-opacity=".07" stroke-width="1.5"/>
+      <path d="M246 92 270 52 294 92Z" fill="#F94D12"/>
+    </svg>
+    <div class="dentro banner__dentro">
+      {{SELO}}
+      <p class="rotulo">Especialização e MBA · 100% online · todo o Brasil</p>
       <h1>Pós EAD que você <em>confere</em> antes de pagar.</h1>
-      <p class="heroi__sub">Curso e certificado da {{INSTITUICAO}}, com validade nacional. O Manoel indica o curso e manda por escrito o valor total antes da matrícula.</p>
-      <a class="botao" data-whats data-posicao="topo" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar com o Manoel no WhatsApp</span></a>
+      <p class="banner__sub">Curso e certificado da {{INSTITUICAO}}, com validade nacional. Um especialista indica o curso e manda por escrito o valor total antes da matrícula.</p>
+      <a class="botao" data-whats data-posicao="topo" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar com um especialista</span></a>
       <div class="atendente">
         {{FOTO}}
         <div>
@@ -12,75 +19,88 @@
           <p class="atendente__horario"><span class="atendente__ponto" aria-hidden="true"></span><span data-horario>Atendimento {{ATENDIMENTO}}</span></p>
         </div>
       </div>
-      <p class="heroi__nota">Quem responde é uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
-      {{SELO}}
     </div>
   </section>
 
-  <section class="dentro" aria-label="Em números">
-    <ul class="fatos">
-      <li>{{TOTAL_CURSOS}}</li>
-      <li>9 áreas</li>
-      <li>De 4 a 12 meses</li>
-      <li>Mínimo de 360 h</li>
-      <li>Validade nacional</li>
-    </ul>
+  <section class="dentro ficha-lugar" aria-labelledby="ficha-titulo">
+    <div class="ficha">
+      <p class="ficha__titulo" id="ficha-titulo">Confira antes de pagar</p>
+      <ul class="ficha__itens">
+        <li>{{ICONE_CERTO}}<span><strong>Instituição responsável</strong>{{INSTITUICAO}}</span></li>
+        <li>{{ICONE_CERTO}}<span><strong>Certificado</strong>Validade nacional (Resolução CNE/CES nº 1/2018)</span></li>
+        <li>{{ICONE_CERTO}}<span><strong>Carga horária</strong>Mínimo de 360 horas</span></li>
+        <li>{{ICONE_CERTO}}<span><strong>Valor total</strong>Por escrito, antes da matrícula</span></li>
+      </ul>
+      <p class="ficha__nota">Conversar no WhatsApp não faz matrícula nem gera cobrança.</p>
+    </div>
+  </section>
+
+  <section class="vantagens" aria-label="Vantagens">
+    <div class="dentro">
+      {{OFERTA}}
+      <ul class="vantagens__lista">
+        <li>{{ICONE_RELOGIO}}<span>De 4 a 12 meses, no ritmo que você escolher</span></li>
+        <li>{{ICONE_GLOBO}}<span>100% online, de qualquer lugar do Brasil</span></li>
+      </ul>
+    </div>
   </section>
 
   <section class="secao" id="areas">
     <div class="dentro">
-      <h2 class="secao__titulo">Escolha sua área</h2>
-      <p class="secao__sub">Toque na sua área: o Manoel já recebe o assunto e responde com as opções de curso.</p>
+      <p class="sobretitulo">{{TOTAL_CURSOS}} em 9 áreas</p>
+      <h2 class="secao__titulo">Encontre sua pós por área</h2>
+      <p class="secao__sub">Toque na sua área: o especialista já recebe o assunto e responde com as opções.</p>
       <div class="areas">
 {{AREAS}}
         <a class="area area--ajuda" data-whats data-posicao="nao-sei" href="{{WHATS_SITE}}" rel="noopener">
           <span class="area__topo"><span class="area__nome">Ainda não sei qual escolher</span></span>
-          <span class="area__ex">Conte seu objetivo e o Manoel indica as opções entre todos os cursos.</span>
+          <span class="area__ex">Conte seu objetivo e receba uma indicação entre todos os cursos.</span>
           <span class="area__cta">Pedir indicação no WhatsApp {{ICONE_SETA}}</span>
         </a>
       </div>
     </div>
   </section>
 
-  <section class="secao confianca">
+  <section class="secao secao--cinza">
     <div class="dentro">
-      <h2 class="secao__titulo">Pode confiar</h2>
-      <p class="secao__sub">Em 2025, cerca de 1,56 milhão de brasileiros cursavam especialização, a maioria a distância (Semesp).</p>
-      <ul class="provas">
-        <li class="prova">
-          <span class="prova__icone">{{ICONE_ESCUDO}}</span>
-          <div><h3>Instituição responsável</h3><p>O curso e o certificado são da {{INSTITUICAO}}.</p></div>
-        </li>
-        <li class="prova">
-          <span class="prova__icone">{{ICONE_CERTO}}</span>
-          <div><h3>Validade nacional</h3><p>Especialização de no mínimo 360 horas, com certificado válido em todo o Brasil (Resolução CNE/CES nº 1/2018).</p></div>
-        </li>
-        <li class="prova">
-          <span class="prova__icone">{{ICONE_PREDIO}}</span>
-          <div><h3>Polo parceiro da Anhanguera</h3><p>A matrícula é feita pelo sistema do polo. {{RAZAO}}, CNPJ {{CNPJ}}.</p></div>
-        </li>
-        <li class="prova">
-          <span class="prova__icone">{{ICONE_PESSOA}}</span>
-          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, {{ATENDIMENTO}}.</p></div>
-        </li>
-      </ul>
+      <h2 class="secao__titulo">Da conversa à matrícula, sem sair de casa</h2>
+      <ol class="passos">
+        <li class="passo"><span class="passo__num" aria-hidden="true">1</span><div><h3>Você chama no WhatsApp</h3><p>Conta sua área e seu objetivo.</p></div></li>
+        <li class="passo"><span class="passo__num" aria-hidden="true">2</span><div><h3>Recebe tudo por escrito</h3><p>Curso, carga horária, ritmo e valor total.</p></div></li>
+        <li class="passo"><span class="passo__num" aria-hidden="true">3</span><div><h3>Faz a matrícula online</h3><p>Pelo sistema do polo, e começa a estudar.</p></div></li>
+      </ol>
     </div>
   </section>
 
-  <section class="secao">
+  <section class="secao institucional">
+    <div class="dentro institucional__dentro">
+      <p class="numero"><strong>1,56 milhão</strong><span>de brasileiros cursavam especialização em 2025, a maioria a distância (Semesp).</span></p>
+      <div class="institucional__texto">
+        <img class="institucional__logo" src="/marca/anhanguera.svg" width="136" height="48" alt="Anhanguera" loading="lazy">
+        <h2>Polo parceiro da Anhanguera</h2>
+        <p>A Central de Pós é o atendimento de pós-graduação da {{RAZAO}}, CNPJ {{CNPJ}}. A matrícula é feita pelo sistema do polo, e o curso e o certificado são da {{INSTITUICAO}}.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao--cinza">
     <div class="dentro">
-      <h2 class="secao__titulo">Perguntas rápidas</h2>
+      <h2 class="secao__titulo">Perguntas frequentes</h2>
       <div class="perguntas">
 {{PERGUNTAS}}
       </div>
     </div>
   </section>
 
-  <section class="secao final">
-    <div class="dentro">
-      <h2 class="secao__titulo">Sua área tem pós. Falta só a conversa.</h2>
-      <p class="secao__sub">O Manoel responde você, mostra as opções e passa o valor exato do seu curso.</p>
-      <a class="botao" data-whats data-posicao="final" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar com o Manoel no WhatsApp</span></a>
+  <section class="final">
+    <svg class="final__geo" viewBox="0 0 420 420" aria-hidden="true" focusable="false">
+      <path d="M40 430 270 40 500 430Z" fill="none" stroke="#FFFFFF" stroke-opacity=".08" stroke-width="2"/>
+      <path d="M246 92 270 52 294 92Z" fill="#F94D12"/>
+    </svg>
+    <div class="dentro final__dentro">
+      <h2>Sua área tem pós. <em>Falta só a conversa.</em></h2>
+      <p>Um especialista responde, mostra as opções e passa o valor exato do seu curso.</p>
+      <a class="botao" data-whats data-posicao="final" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar com um especialista</span></a>
     </div>
   </section>
 </main>

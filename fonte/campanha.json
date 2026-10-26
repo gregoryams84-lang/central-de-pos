@@ -2,9 +2,20 @@
   "_fonte": "Regulamento Outubro da Pós - EAD (itens 2.1, 3.1.2, 3.1.2.1 e 5.2), conferido em 26/10/2026. Trocar de campanha = editar este arquivo e rodar o gerador. Depois do fim, o selo some sozinho.",
   "nome": "Outubro da Pós",
   "fim": "2026-11-02T23:59:00-03:00",
-  "oferta": "2ª pós EAD grátis* na compra da 1ª · parcelas a partir de R$ 129,00**",
+  "ofertas": [
+    {
+      "icone": "presente",
+      "destaque": "2ª pós EAD grátis*",
+      "resto": " na compra da 1ª"
+    },
+    {
+      "icone": "cartao",
+      "destaque": "Parcelas a partir de R$ 129,00**",
+      "resto": ""
+    }
+  ],
   "notas": [
-    "* A 2ª pós EAD, de valor igual ou menor, é liberada conforme o regulamento: no cartão de crédito (exceto recorrente) ou à vista, a partir do 10º dia útil após a compra; no boleto, Pix ou cartão recorrente, depois de concluir a 1ª pós. Regulamento completo com o Manoel.",
-    "** Categoria Tradicional. O valor total e o número de parcelas do seu curso o Manoel informa antes da matrícula."
+    "* A 2ª pós EAD, de valor igual ou menor, é liberada conforme o regulamento: no cartão de crédito (exceto recorrente) ou à vista, a partir do 10º dia útil após a compra; no boleto, Pix ou cartão recorrente, depois de concluir a 1ª pós. Regulamento completo com o especialista.",
+    "** Categoria Tradicional. O valor total e o número de parcelas do seu curso o especialista informa antes da matrícula."
   ]
 }

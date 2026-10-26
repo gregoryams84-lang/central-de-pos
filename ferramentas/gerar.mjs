@@ -70,17 +70,27 @@ const ICONES = {
   ICONE_CERTO: svg('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),
   ICONE_PREDIO: svg('<path d="M4 21V5l8-3 8 3v16M9 21v-5h6v5M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/>'),
   ICONE_PESSOA: svg('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>'),
+  ICONE_RELOGIO: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  ICONE_GLOBO: svg('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
+  ICONE_PRESENTE: svg('<rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8c-2-4-6-4-6-1.5S9 8 12 8zm0 0c2-4 6-4 6-1.5S15 8 12 8z"/>'),
+  ICONE_CARTAO: svg('<rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6.5 15h4"/>'),
 };
 
-function montarSelo(campanha, agora) {
-  if (agora.getTime() > Date.parse(campanha.fim)) return '';
+// Campanha em duas partes: a etiqueta com o prazo no banner e os itens com as regras na faixa cinza.
+// As duas têm data-fim: o gerador não as coloca depois do fim, e o navegador tira se a página ficou em cache.
+function montarCampanha(campanha, agora) {
+  if (agora.getTime() > Date.parse(campanha.fim)) return { tag: '', oferta: '' };
   const [, mes, dia] = campanha.fim.slice(0, 10).split('-'); // data de Brasília, como está escrita
+  const fim = escaparAtributo(campanha.fim);
+  const tag = `<div class="selo-tag" data-fim="${fim}"><span class="selo-tag__ponto" aria-hidden="true"></span>${escaparHtml(campanha.nome)} · <span data-faltam>até ${dia}/${mes}</span></div>`;
+  const itens = campanha.ofertas.map((o) => `<li>${ICONES['ICONE_' + o.icone.toUpperCase()]}<span><strong>${escaparHtml(o.destaque)}</strong>${escaparHtml(o.resto)}</span></li>`).join('');
   const notas = campanha.notas.map((n) => `<p>${escaparHtml(n)}</p>`).join('');
-  return `<div class="selo" data-fim="${escaparAtributo(campanha.fim)}">
-        <p class="selo__nome">${escaparHtml(campanha.nome)} · <span data-faltam>até ${dia}/${mes}</span></p>
-        <p class="selo__oferta">${escaparHtml(campanha.oferta)}</p>
-        <div class="selo__notas">${notas}</div>
+  const oferta = `<div class="campanha" data-fim="${fim}">
+        <ul class="vantagens__lista">${itens}</ul>
+        <p class="campanha__prazo">Até ${dia}/${mes}/${campanha.fim.slice(0, 4)}, às ${campanha.fim.slice(11, 13)}h${campanha.fim.slice(14, 16)} (horário de Brasília)</p>
+        <div class="campanha__notas">${notas}</div>
       </div>`;
+  return { tag, oferta };
 }
 
 function montarAreas(config, areas) {
@@ -136,7 +146,7 @@ function montarFoto(config) {
 const DIAS_SCHEMA = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const hora = (h) => `${String(h).padStart(2, '0')}:00`;
 
-const BARRA = (config) => `<a class="barra-whats" data-whats data-posicao="barra" href="${linkWhats(config, '')}" rel="noopener">${ICONES.ICONE}<span>Falar com o Manoel no WhatsApp</span></a>`;
+const BARRA = (config) => `<a class="barra-whats" data-whats data-posicao="barra" href="${linkWhats(config, '')}" rel="noopener">${ICONES.ICONE}<span>Falar com um especialista</span></a>`;
 
 function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '', barra = '', jsonld = '' }) {
   const ogImagem = existsSync(new URL('og.png', raiz))
@@ -179,8 +189,10 @@ function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '',
 }
 
 export function montarInicio(config, conteudo, agora = new Date()) {
+  const campanha = montarCampanha(conteudo.campanha, agora);
   const corpo = preencher(ler('fonte/inicio.html'), {
-    SELO: montarSelo(conteudo.campanha, agora),
+    SELO: campanha.tag,
+    OFERTA: campanha.oferta,
     AREAS: montarAreas(config, conteudo.areas.areas),
     PERGUNTAS: montarPerguntas(config, conteudo.perguntas),
     TOTAL_CURSOS: escaparHtml(conteudo.areas.totalCursos),

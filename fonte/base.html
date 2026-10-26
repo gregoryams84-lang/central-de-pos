@@ -16,6 +16,7 @@
 {{OG_IMAGEM}}
 <meta name="theme-color" content="#F94D12">
 <link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/marca/icone.svg" type="image/svg+xml">
 <style>
 {{ESTILO}}
 </style>
@@ -24,16 +25,22 @@
 <body class="{{CLASSE}}">
 <header class="topo">
   <div class="topo__dentro">
-    <a class="marca" href="/">Central de Pós <span aria-hidden="true">·</span> Polo Anhanguera</a>
-    <a class="topo__whats" data-whats data-posicao="cabecalho" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar no WhatsApp</span></a>
+    <a class="marca" href="/">
+      <img class="marca__logo" src="/marca/anhanguera.svg" width="102" height="36" alt="Anhanguera">
+      <span class="marca__texto"><strong>Central de Pós</strong><span>Polo parceiro</span></span>
+    </a>
+    <a class="topo__whats" data-whats data-posicao="cabecalho" href="{{WHATS_SITE}}" rel="noopener" aria-label="Falar no WhatsApp">{{ICONE}}<span>Falar no WhatsApp</span></a>
   </div>
 </header>
 {{CONTEUDO}}
 <footer class="rodape">
-  <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
-  <p>Polo parceiro da Anhanguera · {{RAZAO}} · CNPJ {{CNPJ}}</p>
-  <p>Instituição responsável pelos cursos: {{INSTITUICAO}}</p>
-  <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
+  <div class="dentro">
+    <img class="rodape__logo" src="/marca/anhanguera.svg" width="102" height="36" alt="Anhanguera" loading="lazy">
+    <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
+    <p>Polo parceiro da Anhanguera · {{RAZAO}} · CNPJ {{CNPJ}}</p>
+    <p>Cursos e certificados: {{INSTITUICAO}}</p>
+    <p class="rodape__links"><a href="/privacidade/">Privacidade</a><a href="/termos/">Termos de uso</a></p>
+  </div>
 </footer>
 {{BARRA}}
 <script>

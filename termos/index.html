@@ -19,10 +19,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F94D12">
 <link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="/marca/icone.svg" type="image/svg+xml">
 <style>
-/* Central de Pós: celular primeiro. Fonte própria (sem Google Fonts: mais rápido e sem terceiro).
-   Laranja #F94D12 é o único acento; --laranja-texto é o mesmo tom escurecido para texto pequeno
-   passar no contraste mínimo (4,5:1) sobre o fundo claro. */
+/* Central de Pós · Polo Anhanguera: identidade do site oficial da Anhanguera (Montserrat, laranja
+   #F94D12 nos botões em pílula, azul-marinho #16365B, dourado #EDCF9F, cinzas #EDEDED/#DBDBDB),
+   lida em 26/10/2026. Celular primeiro. Fonte própria: sem Google Fonts, mais rápido e sem terceiro.
+   --laranja-texto é o laranja escurecido para texto pequeno passar no contraste mínimo (4,5:1). */
 @font-face { font-family: 'Montserrat'; font-weight: 400; font-display: swap; src: url('/fontes/montserrat-400.woff2') format('woff2'); }
 @font-face { font-family: 'Montserrat'; font-weight: 600; font-display: swap; src: url('/fontes/montserrat-600.woff2') format('woff2'); }
 @font-face { font-family: 'Montserrat'; font-weight: 700; font-display: swap; src: url('/fontes/montserrat-700.woff2') format('woff2'); }
@@ -32,13 +34,19 @@
   --laranja-forte: #D63E0B;
   --laranja-texto: #C2390A;
   --laranja-fundo: #FFF1EA;
+  --azul: #16365B;
+  --azul-claro: #1E4673;
+  --azul-escuro: #0F2742;
+  --dourado: #EDCF9F;
   --texto: #1D1D1D;
-  --texto-suave: #555555;
+  --cinza-texto: #5F5F5F;
+  --cinza-fundo: #EDEDED;
+  --linha: #DBDBDB;
   --fundo: #FCFCFC;
-  --cartao: #FFFFFF;
-  --linha: #E6E6E6;
-  --raio: 14px;
-  --largura: 1080px;
+  --branco: #FFFFFF;
+  --raio: 16px;
+  --sombra: 0 18px 40px -18px rgba(15, 39, 66, 0.35);
+  --largura: 1120px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -54,151 +62,213 @@ body {
 }
 img, svg { display: block; max-width: 100%; }
 a { color: var(--laranja-texto); }
-h1, h2, h3 { line-height: 1.2; margin: 0; }
-p { margin: 0; }
+h1, h2, h3, p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
 .dentro { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 20px; }
-.secao { padding: 48px 0; }
-.secao__titulo { font-size: clamp(1.5rem, 5.5vw, 2.1rem); font-weight: 700; margin-bottom: 10px; }
-.secao__sub { color: var(--texto-suave); margin-bottom: 24px; max-width: 640px; }
+.inteiro { white-space: nowrap; }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
 
-/* Cabeçalho fixo no topo */
-.topo { position: sticky; top: 0; z-index: 20; background: rgba(252, 252, 252, 0.96); border-bottom: 1px solid var(--linha); }
-.topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 56px; padding: 8px 20px; }
-.marca { color: var(--texto); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; text-decoration: none; }
-.marca span { color: var(--laranja); }
-.topo__whats { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 999px; background: var(--laranja); color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; }
-.topo__whats svg { width: 18px; height: 18px; flex: none; }
-/* No celular a barra de baixo faz esse papel. */
-.com-barra .topo__whats { display: none; }
+/* Cabeçalho: logo oficial + "Central de Pós / Polo parceiro" */
+.topo { position: sticky; top: 0; z-index: 20; background: var(--branco); border-bottom: 1px solid var(--linha); }
+.topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 64px; padding: 10px 20px; }
+.marca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; }
+.marca__logo { width: 102px; height: auto; }
+.marca__texto { display: flex; flex-direction: column; padding-left: 12px; border-left: 1px solid var(--linha); line-height: 1.2; }
+.marca__texto strong { font-size: 0.9rem; }
+.marca__texto span { font-size: 0.72rem; font-weight: 600; color: var(--cinza-texto); text-transform: uppercase; letter-spacing: 0.08em; }
+.topo__whats { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 44px; height: 44px; border-radius: 999px; background: var(--laranja); color: var(--branco); text-decoration: none; }
+.topo__whats svg { width: 22px; height: 22px; flex: none; }
+.topo__whats span { display: none; }
 
-/* Botão principal */
+/* Botão principal: pílula laranja, como no site oficial */
 .botao {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; max-width: 420px; min-height: 60px; padding: 14px 22px;
-  border-radius: var(--raio); background: var(--laranja); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; max-width: 400px; min-height: 60px; padding: 14px 26px;
+  border-radius: 999px; background: var(--laranja); color: var(--branco);
   font-weight: 700; font-size: 1.2rem; line-height: 1.25; text-align: center; text-decoration: none;
-  box-shadow: 0 6px 18px rgba(249, 77, 18, 0.28);
+  box-shadow: 0 10px 24px -8px rgba(249, 77, 18, 0.55);
   transition: background-color 0.15s ease, transform 0.15s ease;
 }
 .botao svg { width: 24px; height: 24px; flex: none; }
 .botao:hover { background: var(--laranja-forte); }
 .botao:active { transform: scale(0.98); }
-a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outline-offset: 3px; }
 
-/* Topo da página */
-.heroi { padding: 28px 0 36px; }
-.rotulo { font-size: 0.78rem; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
-.heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
-.heroi h1 em { font-style: normal; color: var(--laranja); }
-.heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
-.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 10px; }
+/* Banner azul com a geometria do triângulo do logo */
+.banner {
+  position: relative; overflow: hidden; color: var(--branco);
+  background: radial-gradient(120% 90% at 100% 0%, var(--azul-claro) 0%, var(--azul) 55%, var(--azul-escuro) 100%);
+  padding: 28px 0 104px;
+}
+.banner__geo { position: absolute; right: -150px; bottom: -40px; width: 460px; height: 460px; pointer-events: none; }
+.banner__dentro { position: relative; animation: entrar 0.5s ease-out both; }
+.selo-tag {
+  display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-bottom: 18px;
+  padding: 7px 14px; border: 1px solid rgba(237, 207, 159, 0.55); border-radius: 999px;
+  background: rgba(237, 207, 159, 0.1); color: var(--dourado);
+  font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+}
+.selo-tag__ponto { width: 6px; height: 6px; border-radius: 50%; background: var(--laranja); }
+.rotulo { font-size: 0.8rem; font-weight: 600; color: rgba(255, 255, 255, 0.72); letter-spacing: 0.02em; margin-bottom: 10px; }
+.banner h1 { font-size: clamp(2rem, 9vw, 3.4rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; max-width: 720px; margin-bottom: 16px; }
+.banner h1 em { font-style: normal; color: var(--dourado); }
+.banner__sub { font-size: 1.04rem; color: rgba(255, 255, 255, 0.86); max-width: 600px; margin-bottom: 26px; }
 
-/* Quem atende: foto pequena, nome e situação do horário, colados ao botão */
-.atendente { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
-.atendente__foto { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--laranja); }
-.atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.3rem; }
-.atendente__nome { font-size: 0.9rem; line-height: 1.35; color: var(--texto-suave); }
-.atendente__nome strong { color: var(--texto); font-weight: 700; }
-.inteiro { white-space: nowrap; }
-.atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.86rem; color: var(--texto-suave); line-height: 1.4; }
-.atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #B8B8B8; }
-.atendente__horario--aberto .atendente__ponto { background: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
+/* Quem atende */
+.atendente { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.atendente__foto { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--dourado); }
+.atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: var(--branco); font-weight: 700; font-size: 1.3rem; }
+.atendente__nome { font-size: 0.9rem; line-height: 1.35; color: rgba(255, 255, 255, 0.8); }
+.atendente__nome strong { color: var(--branco); }
+.atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.84rem; line-height: 1.4; color: rgba(255, 255, 255, 0.8); }
+.atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, 0.45); }
+.atendente__horario--aberto .atendente__ponto { background: #5BD08A; box-shadow: 0 0 0 3px rgba(91, 208, 138, 0.25); }
 
-/* Selo da campanha (some sozinho depois do fim) */
-.selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }
-.selo__nome { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--laranja-texto); margin-bottom: 4px; }
-.selo__oferta { font-weight: 700; font-size: 1.02rem; }
-.selo__notas { margin-top: 8px; font-size: 0.74rem; line-height: 1.5; color: var(--texto-suave); }
-.selo__notas p + p { margin-top: 4px; }
+/* Ficha de conferência: o cartão que sobe sobre o banner */
+.ficha-lugar { position: relative; z-index: 2; margin-top: -72px; }
+.ficha {
+  padding: 22px 20px 18px; border-radius: var(--raio); background: var(--branco);
+  border-top: 4px solid var(--laranja); box-shadow: var(--sombra);
+  animation: entrar 0.6s 0.1s ease-out both;
+}
+.ficha__titulo { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--laranja-texto); margin-bottom: 12px; }
+.ficha__itens { display: grid; gap: 12px; }
+.ficha__itens li { display: flex; gap: 12px; align-items: flex-start; }
+.ficha__itens svg { flex: none; width: 22px; height: 22px; padding: 3px; margin-top: 1px; border-radius: 50%; background: var(--laranja); color: var(--branco); stroke-width: 3; }
+.ficha__itens span { display: flex; flex-direction: column; font-size: 0.93rem; line-height: 1.4; color: var(--cinza-texto); }
+.ficha__itens strong { color: var(--texto); font-size: 0.95rem; }
+.ficha__nota { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--linha); font-size: 0.84rem; color: var(--cinza-texto); }
 
-/* Fatos */
-.fatos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.fatos li { padding: 6px 12px; border: 1px solid var(--linha); border-radius: 999px; background: var(--cartao); font-size: 0.85rem; font-weight: 600; }
+/* Faixa cinza de vantagens (a parte da campanha some sozinha depois do fim) */
+.vantagens { margin-top: 28px; padding: 26px 0; background: var(--cinza-fundo); }
+.vantagens__lista { display: grid; gap: 14px; }
+.vantagens__lista li { display: flex; align-items: center; gap: 12px; font-size: 1rem; }
+.vantagens__lista svg { flex: none; width: 26px; height: 26px; color: var(--laranja); }
+.vantagens__lista strong { font-weight: 700; }
+.campanha { margin-bottom: 14px; padding-bottom: 16px; border-bottom: 1px solid var(--linha); }
+.campanha__prazo { margin-top: 12px; font-size: 0.86rem; font-weight: 700; color: var(--laranja-texto); }
+.campanha__notas { margin-top: 8px; font-size: 0.74rem; line-height: 1.5; color: var(--cinza-texto); }
+.campanha__notas p + p { margin-top: 4px; }
+
+/* Seções */
+.secao { padding: 52px 0; }
+.secao--cinza { background: var(--cinza-fundo); }
+.sobretitulo { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--laranja-texto); margin-bottom: 8px; }
+.secao__titulo { font-size: clamp(1.55rem, 6vw, 2.3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 10px; max-width: 680px; }
+.secao__sub { color: var(--cinza-texto); margin-bottom: 26px; max-width: 620px; }
 
 /* Áreas */
 .areas { display: grid; grid-template-columns: 1fr; gap: 12px; }
 .area {
-  display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 16px;
-  border: 1px solid var(--linha); border-radius: var(--raio); background: var(--cartao);
-  color: var(--texto); text-decoration: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 16px 22px;
+  border: 1px solid var(--linha); border-radius: var(--raio); background: var(--branco);
+  color: var(--texto); text-decoration: none; overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
-.area:hover { border-color: var(--laranja); box-shadow: 0 4px 16px rgba(29, 29, 29, 0.06); }
+.area::before { content: ''; position: absolute; left: 0; top: 16px; bottom: 16px; width: 4px; border-radius: 0 4px 4px 0; background: var(--laranja); }
+.area:hover { border-color: var(--laranja); box-shadow: var(--sombra); transform: translateY(-2px); }
 .area__topo { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .area__nome { font-weight: 700; font-size: 1.08rem; line-height: 1.3; }
-.area__qtd { flex: none; font-size: 0.82rem; font-weight: 700; color: var(--laranja-texto); }
-.area__ex { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5; }
+.area__qtd { flex: none; padding: 2px 10px; border-radius: 999px; background: var(--cinza-fundo); font-size: 0.76rem; font-weight: 700; color: var(--cinza-texto); }
+.area__ex { font-size: 0.88rem; color: var(--cinza-texto); line-height: 1.5; }
 .area__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 0.95rem; color: var(--laranja-texto); }
 .area__cta svg { width: 18px; height: 18px; }
-.area--ajuda { border-style: dashed; border-color: var(--laranja); background: var(--laranja-fundo); }
+.area--ajuda { border-color: var(--azul); background: var(--azul); color: var(--branco); }
+.area--ajuda::before { background: var(--dourado); }
+.area--ajuda .area__ex { color: rgba(255, 255, 255, 0.8); }
+.area--ajuda .area__cta { color: var(--dourado); }
+.area--destaque { border-color: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
 
-/* Confiança */
-.confianca { background: var(--cartao); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
-.provas { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 0; padding: 0; list-style: none; }
-.prova { display: flex; gap: 14px; }
-.prova__icone { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--laranja-fundo); color: var(--laranja-texto); display: flex; align-items: center; justify-content: center; }
-.prova__icone svg { width: 20px; height: 20px; }
-.prova h3 { font-size: 1.02rem; margin-bottom: 4px; }
-.prova p { font-size: 0.93rem; color: var(--texto-suave); }
+/* Passos */
+.passos { display: grid; gap: 14px; }
+.passo { display: flex; gap: 16px; align-items: flex-start; padding: 18px; border-radius: var(--raio); background: var(--branco); }
+.passo__num { flex: none; font-size: 2.6rem; font-weight: 700; line-height: 1; color: var(--laranja); }
+.passo h3 { font-size: 1.05rem; margin-bottom: 2px; }
+.passo p { font-size: 0.93rem; color: var(--cinza-texto); }
+
+/* Polo parceiro */
+.institucional__dentro { display: grid; gap: 28px; }
+.numero { display: flex; flex-direction: column; padding: 22px; border-radius: var(--raio); background: var(--azul); color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; }
+.numero strong { font-size: clamp(2.4rem, 11vw, 3.4rem); line-height: 1; color: var(--dourado); margin-bottom: 8px; letter-spacing: -0.02em; }
+.institucional__logo { width: 136px; height: auto; margin-bottom: 14px; }
+.institucional__texto h2 { font-size: 1.35rem; margin-bottom: 8px; }
+.institucional__texto p { color: var(--cinza-texto); }
 
 /* Perguntas */
-.perguntas { max-width: 760px; }
-.pergunta { border-bottom: 1px solid var(--linha); }
-.pergunta summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 14px 0; font-weight: 700; font-size: 1.02rem; cursor: pointer; list-style: none; }
+.perguntas { display: grid; gap: 10px; max-width: 820px; }
+.pergunta { border-radius: 12px; background: var(--branco); border: 1px solid var(--linha); }
+.pergunta summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; padding: 14px 18px; font-weight: 700; font-size: 1rem; cursor: pointer; list-style: none; }
 .pergunta summary::-webkit-details-marker { display: none; }
-.pergunta summary::after { content: '+'; flex: none; font-size: 1.5rem; font-weight: 400; color: var(--laranja-texto); line-height: 1; }
+.pergunta summary::after { content: '+'; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--laranja-fundo); color: var(--laranja-texto); font-size: 1.25rem; font-weight: 600; line-height: 28px; text-align: center; }
 .pergunta[open] summary::after { content: '–'; }
-.pergunta p { padding: 0 0 18px; color: var(--texto-suave); font-size: 0.96rem; }
+.pergunta p { padding: 0 18px 18px; color: var(--cinza-texto); font-size: 0.95rem; }
 
 /* Chamada final */
-.final { background: var(--texto); color: #fff; text-align: center; }
-.final .secao__titulo { color: #fff; }
-.final .secao__sub { color: #D6D6D6; margin-left: auto; margin-right: auto; }
-.final .botao { margin: 0 auto; }
+.final { position: relative; overflow: hidden; padding: 60px 0; background: radial-gradient(120% 90% at 0% 100%, var(--azul-claro) 0%, var(--azul) 60%, var(--azul-escuro) 100%); color: var(--branco); text-align: center; }
+.final__geo { position: absolute; left: -170px; top: -60px; width: 420px; height: 420px; pointer-events: none; }
+.final__dentro { position: relative; display: flex; flex-direction: column; align-items: center; }
+.final h2 { font-size: clamp(1.6rem, 6.5vw, 2.4rem); line-height: 1.15; max-width: 640px; margin-bottom: 12px; }
+.final h2 em { font-style: normal; color: var(--dourado); }
+.final p { color: rgba(255, 255, 255, 0.82); max-width: 520px; margin-bottom: 26px; }
 
 /* Rodapé */
-.rodape { padding: 28px 20px; text-align: center; font-size: 0.8rem; color: var(--texto-suave); border-top: 1px solid var(--linha); }
+.rodape { padding: 32px 0 28px; background: var(--branco); border-top: 1px solid var(--linha); text-align: center; font-size: 0.8rem; color: var(--cinza-texto); }
+.rodape__logo { width: 102px; height: auto; margin: 0 auto 12px; }
 .rodape p + p { margin-top: 6px; }
 .rodape__marca { font-weight: 700; color: var(--texto); }
+.rodape__links { display: flex; justify-content: center; gap: 18px; }
+.rodape__links a { font-weight: 600; }
 
-/* Barra fixa do WhatsApp no celular */
+/* Barra flutuante do WhatsApp no celular */
 .barra-whats {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 30;
   display: flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 60px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
-  background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.12rem; text-decoration: none;
-  box-shadow: 0 -4px 16px rgba(29, 29, 29, 0.12);
-  transition: transform 0.2s ease;
+  min-height: 56px; padding: 10px 18px; border-radius: 999px;
+  background: var(--laranja); color: var(--branco); font-weight: 700; font-size: 1.2rem; text-decoration: none;
+  box-shadow: 0 14px 30px -10px rgba(15, 39, 66, 0.6);
+  transition: transform 0.25s ease, opacity 0.25s ease;
 }
 .barra-whats svg { width: 24px; height: 24px; flex: none; }
-.barra-whats--fora { transform: translateY(110%); }
-.area--destaque { border-color: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
-.com-barra { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+.barra-whats--fora { transform: translateY(140%); opacity: 0; }
+.com-barra { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
 /* Páginas de texto (privacidade, termos) */
-.texto { max-width: 760px; padding-top: 32px; padding-bottom: 48px; }
-.texto h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 8px; }
-.texto h2 { font-size: 1.15rem; margin: 28px 0 8px; }
-.texto p, .texto li { color: #333; }
+.texto { max-width: 780px; padding-top: 36px; padding-bottom: 56px; }
+.texto h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); margin-bottom: 6px; }
+.texto h2 { font-size: 1.12rem; margin: 28px 0 8px; color: var(--azul); }
+.texto p, .texto li { color: #333333; }
 .texto p + p { margin-top: 10px; }
-.texto ul { padding-left: 20px; margin: 8px 0 0; }
-.texto .atualizado { color: var(--texto-suave); font-size: 0.88rem; }
+.texto ul { list-style: disc; padding-left: 20px; margin-top: 8px; }
+.texto li + li { margin-top: 6px; }
+.texto .atualizado { color: var(--cinza-texto); font-size: 0.88rem; }
+
+@keyframes entrar { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 
 @media (min-width: 640px) {
   .areas { grid-template-columns: repeat(2, 1fr); }
-  .provas { grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
-  .secao { padding: 64px 0; }
-  .heroi { padding: 56px 0 56px; }
+  .ficha__itens { grid-template-columns: repeat(2, 1fr); gap: 16px 24px; }
+  .passos { grid-template-columns: repeat(3, 1fr); }
+  .passo { flex-direction: column; gap: 10px; }
+  .vantagens__lista { grid-template-columns: repeat(2, 1fr); }
+  .secao { padding: 72px 0; }
+  .topo__whats { width: auto; padding: 0 18px; font-weight: 700; font-size: 1.2rem; }
+  .topo__whats span { display: inline; }
 }
 @media (min-width: 960px) {
+  .marca__logo { width: 128px; }
+  .marca__texto strong { font-size: 1rem; }
+  .banner { padding: 64px 0 132px; }
+  .banner__geo { right: 0; bottom: -60px; width: 620px; height: 620px; }
+  .ficha-lugar { margin-top: -92px; }
+  .ficha { padding: 26px 30px 22px; }
+  .ficha__itens { grid-template-columns: repeat(4, 1fr); }
   .areas { grid-template-columns: repeat(3, 1fr); }
-  .provas { grid-template-columns: repeat(4, 1fr); }
-  .com-barra .topo__whats { display: inline-flex; }
+  .institucional__dentro { grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: 48px; }
   .barra-whats { display: none; }
   .com-barra { padding-bottom: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { transition: none !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 
@@ -206,8 +276,11 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 <body class="">
 <header class="topo">
   <div class="topo__dentro">
-    <a class="marca" href="/">Central de Pós <span aria-hidden="true">·</span> Polo Anhanguera</a>
-    <a class="topo__whats" data-whats data-posicao="cabecalho" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar no WhatsApp</span></a>
+    <a class="marca" href="/">
+      <img class="marca__logo" src="/marca/anhanguera.svg" width="102" height="36" alt="Anhanguera">
+      <span class="marca__texto"><strong>Central de Pós</strong><span>Polo parceiro</span></span>
+    </a>
+    <a class="topo__whats" data-whats data-posicao="cabecalho" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar no WhatsApp</span></a>
   </div>
 </header>
 <main class="dentro texto">
@@ -234,10 +307,13 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
   <p>Dúvidas sobre estes termos: <a data-whats data-posicao="termos" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">WhatsApp do atendimento</a>.</p>
 </main>
 <footer class="rodape">
-  <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
-  <p>Polo parceiro da Anhanguera · AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
-  <p>Instituição responsável pelos cursos: Universidade Anhanguera-Uniderp</p>
-  <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
+  <div class="dentro">
+    <img class="rodape__logo" src="/marca/anhanguera.svg" width="102" height="36" alt="Anhanguera" loading="lazy">
+    <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
+    <p>Polo parceiro da Anhanguera · AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
+    <p>Cursos e certificados: Universidade Anhanguera-Uniderp</p>
+    <p class="rodape__links"><a href="/privacidade/">Privacidade</a><a href="/termos/">Termos de uso</a></p>
+  </div>
 </footer>
 
 <script>
@@ -350,7 +426,7 @@ var LINK_CURTO = (function () {
     if (faltam) faltam.textContent = textoFaltam(fimTexto);
   }
 
-  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o Manoel volta,
+  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o atendimento volta,
   // para quem chama à noite não achar que ninguém atende. Sem JS, fica o horário por extenso.
   var horario = document.querySelector('[data-horario]');
   if (horario) {
@@ -367,10 +443,10 @@ var LINK_CURTO = (function () {
     var hora = b.getUTCHours() + b.getUTCMinutes() / 60;
     var abreHoje = DIAS.indexOf(dia) >= 0;
     if (abreHoje && hora >= ABRE && hora < FECHA) return { aberto: true, texto: 'Atendimento aberto agora, até as ' + FECHA + 'h' };
-    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: o Manoel responde hoje a partir das ' + ABRE + 'h' };
+    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: responde hoje a partir das ' + ABRE + 'h' };
     for (var n = 1; n <= 7; n++) {
       var proximo = (dia + n) % 7;
-      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: o Manoel responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
+      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
     }
     return { aberto: false, texto: horario.textContent };
   }
@@ -380,16 +456,15 @@ var LINK_CURTO = (function () {
     var hoje = new Date(agora - 3 * 60 * 60 * 1000);
     var p = fimTexto.slice(0, 10).split('-');
     var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
-    var data = p[2] + '/' + p[1];
     if (dias <= 0) return 'termina hoje às 23h59';
-    if (dias === 1) return 'termina amanhã, ' + data + ', às 23h59';
-    return 'faltam ' + dias + ' dias · até ' + data + ', 23h59';
+    if (dias === 1) return 'termina amanhã';
+    return 'faltam ' + dias + ' dias';
   }
 
   // Barra fixa do celular: só aparece quando nem o botão do topo nem o da chamada final estão na tela,
   // para não repetir o mesmo convite. Sem IntersectionObserver, a barra fica sempre visível.
   var barra = document.querySelector('.barra-whats');
-  var principais = document.querySelectorAll('.heroi .botao, .final .botao');
+  var principais = document.querySelectorAll('.banner .botao, .final .botao');
   if (barra && principais.length && 'IntersectionObserver' in window) {
     var visiveis = {};
     barra.classList.add('barra-whats--fora');

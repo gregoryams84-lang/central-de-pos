@@ -8,27 +8,35 @@
   @font-face { font-family: 'Montserrat'; font-weight: 600; src: url('/fontes/montserrat-600.woff2') format('woff2'); }
   @font-face { font-family: 'Montserrat'; font-weight: 700; src: url('/fontes/montserrat-700.woff2') format('woff2'); }
   html, body { margin: 0; }
-  body { width: 1200px; height: 630px; overflow: hidden; background: #FCFCFC; color: #1D1D1D; font-family: 'Montserrat', sans-serif; }
-  .faixa { position: absolute; left: 0; top: 0; bottom: 0; width: 24px; background: #F94D12; }
-  .dentro { position: absolute; left: 96px; right: 96px; top: 84px; bottom: 72px; display: flex; flex-direction: column; }
-  .marca { font-weight: 700; font-size: 34px; }
-  .marca span { color: #F94D12; }
-  h1 { font-size: 76px; line-height: 1.08; margin: 54px 0 0; letter-spacing: -0.01em; }
-  h1 em { font-style: normal; color: #F94D12; }
-  .rodape { margin-top: auto; display: flex; align-items: center; justify-content: space-between; }
-  .fatos { font-weight: 600; font-size: 28px; color: #555; }
-  .botao { padding: 20px 34px; border-radius: 18px; background: #F94D12; color: #fff; font-weight: 700; font-size: 30px; }
+  body { position: relative; width: 1200px; height: 630px; overflow: hidden; font-family: 'Montserrat', sans-serif; color: #FFFFFF;
+    background: radial-gradient(120% 90% at 100% 0%, #1E4673 0%, #16365B 55%, #0F2742 100%); }
+  .geo { position: absolute; right: -40px; bottom: -80px; width: 640px; height: 640px; }
+  .topo { position: absolute; left: 0; right: 0; top: 0; height: 104px; background: #FFFFFF; display: flex; align-items: center; gap: 22px; padding: 0 80px; }
+  .topo img { width: 170px; }
+  .topo .texto { display: flex; flex-direction: column; padding-left: 22px; border-left: 2px solid #DBDBDB; color: #1D1D1D; line-height: 1.2; }
+  .topo strong { font-size: 30px; }
+  .topo span { font-size: 18px; font-weight: 600; color: #5F5F5F; letter-spacing: 0.1em; text-transform: uppercase; }
+  .dentro { position: absolute; left: 80px; top: 150px; right: 420px; }
+  h1 { font-size: 74px; line-height: 1.06; letter-spacing: -0.02em; margin: 0 0 30px; }
+  h1 em { font-style: normal; color: #EDCF9F; }
+  .botao { display: inline-flex; padding: 20px 40px; border-radius: 999px; background: #F94D12; font-weight: 700; font-size: 30px; }
+  .fatos { position: absolute; left: 80px; bottom: 40px; font-size: 24px; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
 </style>
 </head>
 <body>
-  <div class="faixa"></div>
-  <div class="dentro">
-    <p class="marca" style="margin:0">Central de Pós <span>·</span> Polo Anhanguera</p>
-    <h1>Pós EAD que você<br><em>confere</em> antes<br>de pagar.</h1>
-    <div class="rodape">
-      <span class="fatos">+780 cursos · 9 áreas · validade nacional</span>
-      <span class="botao">Fale no WhatsApp</span>
-    </div>
+  <svg class="geo" viewBox="0 0 420 420" aria-hidden="true">
+    <path d="M40 430 270 40 500 430Z" fill="none" stroke="#FFFFFF" stroke-opacity=".1" stroke-width="2"/>
+    <path d="M150 430 270 226 390 430Z" fill="none" stroke="#EDCF9F" stroke-opacity=".25" stroke-width="1.5"/>
+    <path d="M246 92 270 52 294 92Z" fill="#F94D12"/>
+  </svg>
+  <div class="topo">
+    <img src="/marca/anhanguera.svg" alt="">
+    <div class="texto"><strong>Central de Pós</strong><span>Polo parceiro</span></div>
   </div>
+  <div class="dentro">
+    <h1>Pós EAD que você <em>confere</em> antes de pagar.</h1>
+    <span class="botao">Falar com um especialista</span>
+  </div>
+  <p class="fatos" style="margin:0">Universidade Anhanguera-Uniderp · validade nacional · 100% online</p>
 </body>
 </html>

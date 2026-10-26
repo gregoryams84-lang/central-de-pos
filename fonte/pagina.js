@@ -75,7 +75,7 @@
     if (faltam) faltam.textContent = textoFaltam(fimTexto);
   }
 
-  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o Manoel volta,
+  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o atendimento volta,
   // para quem chama à noite não achar que ninguém atende. Sem JS, fica o horário por extenso.
   var horario = document.querySelector('[data-horario]');
   if (horario) {
@@ -92,10 +92,10 @@
     var hora = b.getUTCHours() + b.getUTCMinutes() / 60;
     var abreHoje = DIAS.indexOf(dia) >= 0;
     if (abreHoje && hora >= ABRE && hora < FECHA) return { aberto: true, texto: 'Atendimento aberto agora, até as ' + FECHA + 'h' };
-    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: o Manoel responde hoje a partir das ' + ABRE + 'h' };
+    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: responde hoje a partir das ' + ABRE + 'h' };
     for (var n = 1; n <= 7; n++) {
       var proximo = (dia + n) % 7;
-      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: o Manoel responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
+      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
     }
     return { aberto: false, texto: horario.textContent };
   }
@@ -105,16 +105,15 @@
     var hoje = new Date(agora - 3 * 60 * 60 * 1000);
     var p = fimTexto.slice(0, 10).split('-');
     var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
-    var data = p[2] + '/' + p[1];
     if (dias <= 0) return 'termina hoje às 23h59';
-    if (dias === 1) return 'termina amanhã, ' + data + ', às 23h59';
-    return 'faltam ' + dias + ' dias · até ' + data + ', 23h59';
+    if (dias === 1) return 'termina amanhã';
+    return 'faltam ' + dias + ' dias';
   }
 
   // Barra fixa do celular: só aparece quando nem o botão do topo nem o da chamada final estão na tela,
   // para não repetir o mesmo convite. Sem IntersectionObserver, a barra fica sempre visível.
   var barra = document.querySelector('.barra-whats');
-  var principais = document.querySelectorAll('.heroi .botao, .final .botao');
+  var principais = document.querySelectorAll('.banner .botao, .final .botao');
   if (barra && principais.length && 'IntersectionObserver' in window) {
     var visiveis = {};
     barra.classList.add('barra-whats--fora');
