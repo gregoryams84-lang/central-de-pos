@@ -99,6 +99,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.3rem; }
 .atendente__nome { font-size: 0.9rem; line-height: 1.35; color: var(--texto-suave); }
 .atendente__nome strong { color: var(--texto); font-weight: 700; }
+.inteiro { white-space: nowrap; }
 .atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.86rem; color: var(--texto-suave); line-height: 1.4; }
 .atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #B8B8B8; }
 .atendente__horario--aberto .atendente__ponto { background: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
@@ -217,9 +218,9 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
       <p class="heroi__sub">Curso e certificado da Universidade Anhanguera-Uniderp, com validade nacional. O Manoel indica o curso e manda por escrito o valor total antes da matrícula.</p>
       <a class="botao" data-whats data-posicao="topo" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
       <div class="atendente">
-        <span class="atendente__foto atendente__foto--letra" aria-hidden="true">M</span>
+        <img class="atendente__foto" src="/manoel.webp" width="52" height="52" alt="Manoel Junior">
         <div>
-          <p class="atendente__nome"><strong>Manoel Junior</strong> · especialista em pós</p>
+          <p class="atendente__nome"><strong>Manoel Junior</strong> · <span class="inteiro">especialista em pós</span></p>
           <p class="atendente__horario"><span class="atendente__ponto" aria-hidden="true"></span><span data-horario>Atendimento de segunda a sábado, das 8h às 19h</span></p>
         </div>
       </div>
