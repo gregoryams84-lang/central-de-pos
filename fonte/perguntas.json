@@ -1,15 +1,25 @@
 {
-  "_fonte": "Validade e carga horária: Resolução CNE/CES nº 1/2018, art. 2º §1º, art. 7º I e art. 8º §3º e §4º (conferida em 26/10/2026). {{INSTITUICAO}}, {{RAZAO}} e {{CNPJ}} vêm de config.json.",
+  "_fonte": "Validade e carga horária: Resolução CNE/CES nº 1/2018, art. 2º §1º, art. 7º I e art. 8º §3º e §4º (conferida em 26/10/2026). Ordem e escolha: pesquisa de conversão de 26/10 (research_notes/site_conversao). {{INSTITUICAO}}, {{RAZAO}} e {{CNPJ}} vêm de config.json.",
   "perguntas": [
-    { "pergunta": "Isso é golpe?",
-      "resposta": "Não. Somos um polo parceiro da Anhanguera, da empresa {{RAZAO}}, CNPJ {{CNPJ}}. O curso e o certificado são da {{INSTITUICAO}}, e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total." },
-    { "pergunta": "Preciso ir ao polo?",
-      "resposta": "Não. A pós é 100% online: você faz a matrícula pelo WhatsApp e estuda de onde estiver, no seu horário." },
-    { "pergunta": "Quanto tempo leva?",
-      "resposta": "Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem." },
-    { "pergunta": "Pós EAD tem validade?",
-      "resposta": "Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista." },
-    { "pergunta": "Como é a matrícula?",
-      "resposta": "Pelo WhatsApp, com o Manoel. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Você não preenche nada neste site." }
+    {
+      "pergunta": "Isso é golpe?",
+      "resposta": "Não. Somos um polo parceiro da Anhanguera, da empresa {{RAZAO}}, CNPJ {{CNPJ}}. O curso e o certificado são da {{INSTITUICAO}}, e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."
+    },
+    {
+      "pergunta": "Serve para concurso?",
+      "resposta": "Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso."
+    },
+    {
+      "pergunta": "Quanto tempo leva?",
+      "resposta": "Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."
+    },
+    {
+      "pergunta": "Pós EAD tem validade?",
+      "resposta": "Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."
+    },
+    {
+      "pergunta": "Como é a matrícula?",
+      "resposta": "Pelo WhatsApp, com o Manoel, sem ir a lugar nenhum. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Depois, você estuda 100% online, no seu horário."
+    }
   ]
 }

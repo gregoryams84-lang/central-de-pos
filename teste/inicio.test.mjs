@@ -153,9 +153,9 @@ test('"grátis" só aparece com a regra de liberação ao lado', () => {
 
 test('o selo conta os dias que faltam pelo calendário de Brasília', () => {
   const faltam = (quando) => abrir(html, { agora: Date.parse(quando) }).selos[0].faltam.textContent;
-  assert.equal(faltam('2026-10-26T12:00:00-03:00'), 'faltam 7 dias, até 02/11');
-  assert.equal(faltam('2026-10-26T23:30:00-03:00'), 'faltam 7 dias, até 02/11');
-  assert.equal(faltam('2026-11-01T00:10:00-03:00'), 'termina amanhã, 02/11');
+  assert.equal(faltam('2026-10-26T12:00:00-03:00'), 'faltam 7 dias · até 02/11, 23h59');
+  assert.equal(faltam('2026-10-26T23:30:00-03:00'), 'faltam 7 dias · até 02/11, 23h59');
+  assert.equal(faltam('2026-11-01T00:10:00-03:00'), 'termina amanhã, 02/11, às 23h59');
   assert.equal(faltam('2026-11-02T08:00:00-03:00'), 'termina hoje às 23h59');
   assert.equal(faltam('2026-11-02T23:58:00-03:00'), 'termina hoje às 23h59');
 });

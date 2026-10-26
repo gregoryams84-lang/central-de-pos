@@ -2,23 +2,95 @@
   "_fonte": "Catálogo oficial da pós (jul/2026), lido em 26/10/2026: material oficial/1 - cursos/cursos_pos_jul2026.csv. Nomes de curso exatamente como no catálogo.",
   "totalCursos": "Mais de 780 cursos",
   "areas": [
-    { "nome": "Negócios e MBA", "slug": "negocios", "cursos": 199,
-      "exemplos": ["MBA em Gestão de Pessoas", "MBA em Gestão de Recursos Humanos e Departamento Pessoal", "MBA em Finanças, Auditoria e Controladoria"] },
-    { "nome": "Educação", "slug": "educacao", "cursos": 148,
-      "exemplos": ["Neuropsicopedagogia", "Psicopedagogia Clínica e Institucional", "Educação Especial e Inclusiva"] },
-    { "nome": "Engenharia e Arquitetura", "slug": "engenharia", "cursos": 132,
-      "exemplos": ["Engenharia de Segurança do Trabalho", "MBA em Logística e Supply Chain Management", "Arquitetura sustentável"] },
-    { "nome": "Ciências, Exatas e Tecnologia", "slug": "tecnologia", "cursos": 119,
-      "exemplos": ["Ciência de Dados e Inteligência Artificial", "Engenharia de Software", "Gestão de Projetos Com Inteligência Artificial"] },
-    { "nome": "Saúde, Esporte e Estética", "slug": "saude", "cursos": 116,
-      "exemplos": ["Enfermagem em Urgência e Emergência", "Enfermagem do Trabalho", "Nutrição Esportiva e Performance"] },
-    { "nome": "Direito", "slug": "direito", "cursos": 24,
-      "exemplos": ["Direito Penal e Processo Penal", "Direito Previdenciário: Teoria e Prática", "Direito Tributário"] },
-    { "nome": "Ciências Sociais, Serviços e Outros", "slug": "sociais", "cursos": 26,
-      "exemplos": ["Psicologia Organizacional", "Serviço Social e gestão de projetos sociais", "Gestão de Eventos"] },
-    { "nome": "Comunicação, Artes e Humanidades", "slug": "comunicacao", "cursos": 16,
-      "exemplos": ["Comunicação e Oratória", "Design de produtos digitais - UX-UI", "Influência digital e personal branding"] },
-    { "nome": "Agricultura e Veterinária", "slug": "agro", "cursos": 7,
-      "exemplos": ["MBA em Agronegócios", "Agricultura de precisão", "ESG no Agronegócio"] }
+    {
+      "nome": "Negócios e MBA",
+      "slug": "negocios",
+      "cursos": 199,
+      "exemplos": [
+        "MBA em Gestão de Pessoas",
+        "MBA em Gestão de Recursos Humanos e Departamento Pessoal",
+        "MBA em Finanças, Auditoria e Controladoria"
+      ]
+    },
+    {
+      "nome": "Educação",
+      "slug": "educacao",
+      "cursos": 148,
+      "exemplos": [
+        "Neuropsicopedagogia",
+        "Psicopedagogia Clínica e Institucional",
+        "Educação Especial e Inclusiva"
+      ]
+    },
+    {
+      "nome": "Saúde, Esporte e Estética",
+      "slug": "saude",
+      "cursos": 116,
+      "exemplos": [
+        "Enfermagem em Urgência e Emergência",
+        "Enfermagem do Trabalho",
+        "Nutrição Esportiva e Performance"
+      ]
+    },
+    {
+      "nome": "Engenharia e Arquitetura",
+      "slug": "engenharia",
+      "cursos": 132,
+      "exemplos": [
+        "Engenharia de Segurança do Trabalho",
+        "MBA em Logística e Supply Chain Management",
+        "Arquitetura sustentável"
+      ]
+    },
+    {
+      "nome": "Ciências, Exatas e Tecnologia",
+      "slug": "tecnologia",
+      "cursos": 119,
+      "exemplos": [
+        "Ciência de Dados e Inteligência Artificial",
+        "Engenharia de Software",
+        "Gestão de Projetos Com Inteligência Artificial"
+      ]
+    },
+    {
+      "nome": "Direito",
+      "slug": "direito",
+      "cursos": 24,
+      "exemplos": [
+        "Direito Penal e Processo Penal",
+        "Direito Previdenciário: Teoria e Prática",
+        "Direito Tributário"
+      ]
+    },
+    {
+      "nome": "Ciências Sociais, Serviços e Outros",
+      "slug": "sociais",
+      "cursos": 26,
+      "exemplos": [
+        "Psicologia Organizacional",
+        "Serviço Social e gestão de projetos sociais",
+        "Gestão de Eventos"
+      ]
+    },
+    {
+      "nome": "Comunicação, Artes e Humanidades",
+      "slug": "comunicacao",
+      "cursos": 16,
+      "exemplos": [
+        "Comunicação e Oratória",
+        "Design de produtos digitais - UX-UI",
+        "Influência digital e personal branding"
+      ]
+    },
+    {
+      "nome": "Agricultura e Veterinária",
+      "slug": "agro",
+      "cursos": 7,
+      "exemplos": [
+        "MBA em Agronegócios",
+        "Agricultura de precisão",
+        "ESG no Agronegócio"
+      ]
+    }
   ]
 }

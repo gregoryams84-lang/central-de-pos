@@ -13,7 +13,10 @@
 <meta property="og:title" content="Termos de uso | Central de Pós · Polo Anhanguera">
 <meta property="og:description" content="Termos de uso do site da Central de Pós · Polo Anhanguera.">
 <meta property="og:url" content="https://centraldepos.com.br/termos/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://centraldepos.com.br/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F94D12">
 <link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -115,8 +118,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .area__ex { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5; }
 .area__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 0.95rem; color: var(--laranja-texto); }
 .area__cta svg { width: 18px; height: 18px; }
-.areas__nota { margin-top: 18px; color: var(--texto-suave); font-size: 0.95rem; }
-.areas__nota a { font-weight: 700; }
+.area--ajuda { border-style: dashed; border-color: var(--laranja); background: var(--laranja-fundo); }
 
 /* Confiança */
 .confianca { background: var(--cartao); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
@@ -344,19 +346,22 @@ var LINK_CURTO = (function () {
     var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
     var data = p[2] + '/' + p[1];
     if (dias <= 0) return 'termina hoje às 23h59';
-    if (dias === 1) return 'termina amanhã, ' + data;
-    return 'faltam ' + dias + ' dias, até ' + data;
+    if (dias === 1) return 'termina amanhã, ' + data + ', às 23h59';
+    return 'faltam ' + dias + ' dias · até ' + data + ', 23h59';
   }
 
-  // Barra fixa do celular: entra quando o botão do topo sai da tela, para não repetir o mesmo convite.
-  // Sem IntersectionObserver, a barra fica sempre visível.
+  // Barra fixa do celular: só aparece quando nem o botão do topo nem o da chamada final estão na tela,
+  // para não repetir o mesmo convite. Sem IntersectionObserver, a barra fica sempre visível.
   var barra = document.querySelector('.barra-whats');
-  var principal = document.querySelector('.heroi .botao');
-  if (barra && principal && 'IntersectionObserver' in window) {
+  var principais = document.querySelectorAll('.heroi .botao, .final .botao');
+  if (barra && principais.length && 'IntersectionObserver' in window) {
+    var visiveis = {};
     barra.classList.add('barra-whats--fora');
-    new IntersectionObserver(function (registros) {
-      barra.classList.toggle('barra-whats--fora', registros[0].isIntersecting);
-    }).observe(principal);
+    var observador = new IntersectionObserver(function (registros) {
+      for (var k = 0; k < registros.length; k++) visiveis[registros[k].target.getAttribute('data-posicao')] = registros[k].isIntersecting;
+      barra.classList.toggle('barra-whats--fora', !!(visiveis.topo || visiveis.final));
+    });
+    for (var m = 0; m < principais.length; m++) observador.observe(principais[m]);
   }
 
   // ?area=saude (vídeo de área): leva direto ao cartão da área.

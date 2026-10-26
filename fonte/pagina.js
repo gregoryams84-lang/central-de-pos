@@ -82,19 +82,22 @@
     var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
     var data = p[2] + '/' + p[1];
     if (dias <= 0) return 'termina hoje às 23h59';
-    if (dias === 1) return 'termina amanhã, ' + data;
-    return 'faltam ' + dias + ' dias, até ' + data;
+    if (dias === 1) return 'termina amanhã, ' + data + ', às 23h59';
+    return 'faltam ' + dias + ' dias · até ' + data + ', 23h59';
   }
 
-  // Barra fixa do celular: entra quando o botão do topo sai da tela, para não repetir o mesmo convite.
-  // Sem IntersectionObserver, a barra fica sempre visível.
+  // Barra fixa do celular: só aparece quando nem o botão do topo nem o da chamada final estão na tela,
+  // para não repetir o mesmo convite. Sem IntersectionObserver, a barra fica sempre visível.
   var barra = document.querySelector('.barra-whats');
-  var principal = document.querySelector('.heroi .botao');
-  if (barra && principal && 'IntersectionObserver' in window) {
+  var principais = document.querySelectorAll('.heroi .botao, .final .botao');
+  if (barra && principais.length && 'IntersectionObserver' in window) {
+    var visiveis = {};
     barra.classList.add('barra-whats--fora');
-    new IntersectionObserver(function (registros) {
-      barra.classList.toggle('barra-whats--fora', registros[0].isIntersecting);
-    }).observe(principal);
+    var observador = new IntersectionObserver(function (registros) {
+      for (var k = 0; k < registros.length; k++) visiveis[registros[k].target.getAttribute('data-posicao')] = registros[k].isIntersecting;
+      barra.classList.toggle('barra-whats--fora', !!(visiveis.topo || visiveis.final));
+    });
+    for (var m = 0; m < principais.length; m++) observador.observe(principais[m]);
   }
 
   // ?area=saude (vídeo de área): leva direto ao cartão da área.

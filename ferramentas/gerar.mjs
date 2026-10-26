@@ -50,8 +50,12 @@ export function montarPagina(config, { caminho, codigo }) {
     .replaceAll('{{CODIGO}}', codigo)
     .replaceAll('{{CAMINHO}}', caminho)
     .replaceAll('{{REGISTRO}}', config.registroCliques)
-    .replaceAll('{{URL_PADRAO}}', escaparAtributo(padrao.url));
+    .replaceAll('{{URL_PADRAO}}', escaparAtributo(padrao.url))
+    .replaceAll('{{TELEFONE}}', telefone(config));
 }
+
+// 5519992467847 -> (19) 99246-7847: o número por extenso, para quando o app não abre o WhatsApp.
+const telefone = (config) => `(${config.whatsapp.slice(2, 4)}) ${config.whatsapp.slice(4, -4)}-${config.whatsapp.slice(-4)}`;
 
 // Instituição responsável (Decreto 12.456/2025): enquanto não for confirmada, a página mostra o
 // marcador e fica fora da busca. Nada vai ao ar com o marcador.

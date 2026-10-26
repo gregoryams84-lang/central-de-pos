@@ -13,7 +13,10 @@
 <meta property="og:title" content="Pós-graduação 100% online | Central de Pós · Polo Anhanguera">
 <meta property="og:description" content="Especialização e MBA 100% online, para todo o Brasil. Escolha sua área e fale com o Manoel no WhatsApp: atendimento humano do primeiro oi à matrícula.">
 <meta property="og:url" content="https://centraldepos.com.br/">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://centraldepos.com.br/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F94D12">
 <link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
@@ -115,8 +118,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .area__ex { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5; }
 .area__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 0.95rem; color: var(--laranja-texto); }
 .area__cta svg { width: 18px; height: 18px; }
-.areas__nota { margin-top: 18px; color: var(--texto-suave); font-size: 0.95rem; }
-.areas__nota a { font-weight: 700; }
+.area--ajuda { border-style: dashed; border-color: var(--laranja); background: var(--laranja-fundo); }
 
 /* Confiança */
 .confianca { background: var(--cartao); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
@@ -188,7 +190,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
   * { transition: none !important; }
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","name":"Central de Pós · Polo Anhanguera","legalName":"AUREA EDUCACIONAL LTDA","taxID":"67.140.776/0001-88","url":"https://centraldepos.com.br/","areaServed":"BR","contactPoint":{"@type":"ContactPoint","telephone":"+55-19-99246-7847","contactType":"customer service","availableLanguage":"Portuguese"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Isso é golpe?","acceptedAnswer":{"@type":"Answer","text":"Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."}},{"@type":"Question","name":"Preciso ir ao polo?","acceptedAnswer":{"@type":"Answer","text":"Não. A pós é 100% online: você faz a matrícula pelo WhatsApp e estuda de onde estiver, no seu horário."}},{"@type":"Question","name":"Quanto tempo leva?","acceptedAnswer":{"@type":"Answer","text":"Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."}},{"@type":"Question","name":"Pós EAD tem validade?","acceptedAnswer":{"@type":"Answer","text":"Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."}},{"@type":"Question","name":"Como é a matrícula?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp, com o Manoel. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Você não preenche nada neste site."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","name":"Central de Pós · Polo Anhanguera","legalName":"AUREA EDUCACIONAL LTDA","taxID":"67.140.776/0001-88","url":"https://centraldepos.com.br/","areaServed":"BR","contactPoint":{"@type":"ContactPoint","telephone":"+55-19-99246-7847","contactType":"customer service","availableLanguage":"Portuguese"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Isso é golpe?","acceptedAnswer":{"@type":"Answer","text":"Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."}},{"@type":"Question","name":"Serve para concurso?","acceptedAnswer":{"@type":"Answer","text":"Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso."}},{"@type":"Question","name":"Quanto tempo leva?","acceptedAnswer":{"@type":"Answer","text":"Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."}},{"@type":"Question","name":"Pós EAD tem validade?","acceptedAnswer":{"@type":"Answer","text":"Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."}},{"@type":"Question","name":"Como é a matrícula?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp, com o Manoel, sem ir a lugar nenhum. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Depois, você estuda 100% online, no seu horário."}}]}]}</script>
 </head>
 <body class="com-barra">
 <header class="topo">
@@ -201,13 +203,13 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
   <section class="heroi">
     <div class="dentro">
       <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
-      <h1>Pós-graduação online, com <em>gente de verdade</em> te atendendo.</h1>
-      <p class="heroi__sub">Diga sua área e seu objetivo no WhatsApp. O Manoel indica o curso, passa o valor exato e faz sua matrícula com você.</p>
+      <h1>Pós EAD que você <em>confere</em> antes de pagar.</h1>
+      <p class="heroi__sub">Certificado com validade nacional e no mínimo 360 horas. Diga sua área no WhatsApp: o Manoel indica o curso e manda por escrito a instituição e o valor total antes da matrícula.</p>
       <a class="botao" data-whats data-posicao="topo" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
-      <p class="heroi__nota">Quem responde é uma pessoa, não um robô · sem compromisso</p>
+      <p class="heroi__nota">Quem responde é o Manoel, uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
       <div class="selo" data-fim="2026-11-02T23:59:00-03:00">
         <p class="selo__nome">Outubro da Pós · <span data-faltam>até 02/11</span></p>
-        <p class="selo__oferta">2ª pós EAD grátis* · parcelas a partir de R$ 129,00**</p>
+        <p class="selo__oferta">2ª pós EAD grátis* na compra da 1ª · parcelas a partir de R$ 129,00**</p>
         <div class="selo__notas"><p>* A 2ª pós EAD, de valor igual ou menor, é liberada conforme o regulamento: no cartão de crédito (exceto recorrente) ou à vista, a partir do 10º dia útil após a compra; no boleto, Pix ou cartão recorrente, depois de concluir a 1ª pós. Regulamento completo com o Manoel.</p><p>** Categoria Tradicional. O valor total e o número de parcelas do seu curso o Manoel informa antes da matrícula.</p></div>
       </div>
     </div>
@@ -238,6 +240,11 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
           <span class="area__ex">Neuropsicopedagogia · Psicopedagogia Clínica e Institucional · Educação Especial e Inclusiva</span>
           <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
+        <a class="area" id="area-saude" data-whats data-area="Saúde, Esporte e Estética" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Sa%C3%BAde%2C%20Esporte%20e%20Est%C3%A9tica%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Saúde, Esporte e Estética</span><span class="area__qtd">116 cursos</span></span>
+          <span class="area__ex">Enfermagem em Urgência e Emergência · Enfermagem do Trabalho · Nutrição Esportiva e Performance</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
         <a class="area" id="area-engenharia" data-whats data-area="Engenharia e Arquitetura" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Engenharia%20e%20Arquitetura%20(SITE)" rel="noopener">
           <span class="area__topo"><span class="area__nome">Engenharia e Arquitetura</span><span class="area__qtd">132 cursos</span></span>
           <span class="area__ex">Engenharia de Segurança do Trabalho · MBA em Logística e Supply Chain Management · Arquitetura sustentável</span>
@@ -246,11 +253,6 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
         <a class="area" id="area-tecnologia" data-whats data-area="Ciências, Exatas e Tecnologia" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Ci%C3%AAncias%2C%20Exatas%20e%20Tecnologia%20(SITE)" rel="noopener">
           <span class="area__topo"><span class="area__nome">Ciências, Exatas e Tecnologia</span><span class="area__qtd">119 cursos</span></span>
           <span class="area__ex">Ciência de Dados e Inteligência Artificial · Engenharia de Software · Gestão de Projetos Com Inteligência Artificial</span>
-          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-        <a class="area" id="area-saude" data-whats data-area="Saúde, Esporte e Estética" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Sa%C3%BAde%2C%20Esporte%20e%20Est%C3%A9tica%20(SITE)" rel="noopener">
-          <span class="area__topo"><span class="area__nome">Saúde, Esporte e Estética</span><span class="area__qtd">116 cursos</span></span>
-          <span class="area__ex">Enfermagem em Urgência e Emergência · Enfermagem do Trabalho · Nutrição Esportiva e Performance</span>
           <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
         <a class="area" id="area-direito" data-whats data-area="Direito" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Direito%20(SITE)" rel="noopener">
@@ -273,14 +275,19 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
           <span class="area__ex">MBA em Agronegócios · Agricultura de precisão · ESG no Agronegócio</span>
           <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </a>
+        <a class="area area--ajuda" data-whats data-posicao="nao-sei" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Ainda não sei qual escolher</span></span>
+          <span class="area__ex">Conte seu objetivo e o Manoel indica as opções entre todos os cursos.</span>
+          <span class="area__cta">Pedir indicação no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
       </div>
-      <p class="areas__nota">Não achou o seu curso? <a data-whats data-posicao="nao-achou" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">Pergunte ao Manoel</a>: ele procura entre todos os cursos.</p>
     </div>
   </section>
 
   <section class="secao confianca">
     <div class="dentro">
       <h2 class="secao__titulo">Pode confiar</h2>
+      <p class="secao__sub">Em 2025, cerca de 1,56 milhão de brasileiros cursavam especialização, a maioria a distância (Semesp).</p>
       <ul class="provas">
         <li class="prova">
           <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg></span>
@@ -307,10 +314,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
       <h2 class="secao__titulo">Perguntas rápidas</h2>
       <div class="perguntas">
         <details class="pergunta"><summary>Isso é golpe?</summary><p>Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total.</p></details>
-        <details class="pergunta"><summary>Preciso ir ao polo?</summary><p>Não. A pós é 100% online: você faz a matrícula pelo WhatsApp e estuda de onde estiver, no seu horário.</p></details>
+        <details class="pergunta"><summary>Serve para concurso?</summary><p>Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso.</p></details>
         <details class="pergunta"><summary>Quanto tempo leva?</summary><p>Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem.</p></details>
         <details class="pergunta"><summary>Pós EAD tem validade?</summary><p>Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista.</p></details>
-        <details class="pergunta"><summary>Como é a matrícula?</summary><p>Pelo WhatsApp, com o Manoel. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Você não preenche nada neste site.</p></details>
+        <details class="pergunta"><summary>Como é a matrícula?</summary><p>Pelo WhatsApp, com o Manoel, sem ir a lugar nenhum. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Depois, você estuda 100% online, no seu horário.</p></details>
       </div>
     </div>
   </section>
@@ -447,19 +454,22 @@ var LINK_CURTO = (function () {
     var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
     var data = p[2] + '/' + p[1];
     if (dias <= 0) return 'termina hoje às 23h59';
-    if (dias === 1) return 'termina amanhã, ' + data;
-    return 'faltam ' + dias + ' dias, até ' + data;
+    if (dias === 1) return 'termina amanhã, ' + data + ', às 23h59';
+    return 'faltam ' + dias + ' dias · até ' + data + ', 23h59';
   }
 
-  // Barra fixa do celular: entra quando o botão do topo sai da tela, para não repetir o mesmo convite.
-  // Sem IntersectionObserver, a barra fica sempre visível.
+  // Barra fixa do celular: só aparece quando nem o botão do topo nem o da chamada final estão na tela,
+  // para não repetir o mesmo convite. Sem IntersectionObserver, a barra fica sempre visível.
   var barra = document.querySelector('.barra-whats');
-  var principal = document.querySelector('.heroi .botao');
-  if (barra && principal && 'IntersectionObserver' in window) {
+  var principais = document.querySelectorAll('.heroi .botao, .final .botao');
+  if (barra && principais.length && 'IntersectionObserver' in window) {
+    var visiveis = {};
     barra.classList.add('barra-whats--fora');
-    new IntersectionObserver(function (registros) {
-      barra.classList.toggle('barra-whats--fora', registros[0].isIntersecting);
-    }).observe(principal);
+    var observador = new IntersectionObserver(function (registros) {
+      for (var k = 0; k < registros.length; k++) visiveis[registros[k].target.getAttribute('data-posicao')] = registros[k].isIntersecting;
+      barra.classList.toggle('barra-whats--fora', !!(visiveis.topo || visiveis.final));
+    });
+    for (var m = 0; m < principais.length; m++) observador.observe(principais[m]);
   }
 
   // ?area=saude (vídeo de área): leva direto ao cartão da área.
