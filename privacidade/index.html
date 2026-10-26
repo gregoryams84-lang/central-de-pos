@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Política de privacidade | Central de Pós · Polo Anhanguera</title>
 <meta name="description" content="Como a Central de Pós · Polo Anhanguera trata os dados de quem visita o site e conversa no WhatsApp.">
-<meta name="robots" content="noindex">
+
 <link rel="canonical" href="https://centraldepos.com.br/privacidade/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
@@ -91,7 +91,17 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
 .heroi h1 em { font-style: normal; color: var(--laranja); }
 .heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
-.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 12px; }
+.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 10px; }
+
+/* Quem atende: foto pequena, nome e situação do horário, colados ao botão */
+.atendente { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.atendente__foto { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--laranja); }
+.atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.3rem; }
+.atendente__nome { font-size: 0.9rem; line-height: 1.35; color: var(--texto-suave); }
+.atendente__nome strong { color: var(--texto); font-weight: 700; }
+.atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.86rem; color: var(--texto-suave); line-height: 1.4; }
+.atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #B8B8B8; }
+.atendente__horario--aberto .atendente__ponto { background: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
 
 /* Selo da campanha (some sozinho depois do fim) */
 .selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }
@@ -216,7 +226,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
   <p>O site é hospedado no GitHub Pages, que pode registrar dados técnicos de acesso, como o endereço IP, para segurança, conforme a política do próprio GitHub.</p>
 
   <h2>A conversa no WhatsApp</h2>
-  <p>Ao chamar o Manoel, você fala com ele pelo WhatsApp, um serviço da Meta com regras próprias. Usamos o que você mandar na conversa (nome, telefone, curso de interesse e, na matrícula, os documentos pedidos) só para tirar suas dúvidas e fazer a sua matrícula. Na matrícula, esses dados vão para a instituição responsável pelo curso: [INSTITUIÇÃO A CONFIRMAR].</p>
+  <p>Ao chamar o Manoel, você fala com ele pelo WhatsApp, um serviço da Meta com regras próprias. Usamos o que você mandar na conversa (nome, telefone, curso de interesse e, na matrícula, os documentos pedidos) só para tirar suas dúvidas e fazer a sua matrícula. Na matrícula, esses dados vão para a instituição responsável pelo curso: Universidade Anhanguera-Uniderp.</p>
   <p>Se não houver matrícula, apagamos os dados da conversa em até 12 meses depois do último contato.</p>
 
   <h2>Seus direitos</h2>
@@ -225,7 +235,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 <footer class="rodape">
   <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
   <p>Polo parceiro da Anhanguera · AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
-  <p>Instituição responsável pelos cursos: [INSTITUIÇÃO A CONFIRMAR]</p>
+  <p>Instituição responsável pelos cursos: Universidade Anhanguera-Uniderp</p>
   <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
 </footer>
 
@@ -337,6 +347,31 @@ var LINK_CURTO = (function () {
     if (!(agora <= Date.parse(fimTexto))) { selos[j].parentNode.removeChild(selos[j]); continue; }
     var faltam = selos[j].querySelector('[data-faltam]');
     if (faltam) faltam.textContent = textoFaltam(fimTexto);
+  }
+
+  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o Manoel volta,
+  // para quem chama à noite não achar que ninguém atende. Sem JS, fica o horário por extenso.
+  var horario = document.querySelector('[data-horario]');
+  if (horario) {
+    var situacao = situacaoAtendimento();
+    horario.textContent = situacao.texto;
+    if (situacao.aberto) horario.parentNode.classList.add('atendente__horario--aberto');
+  }
+
+  function situacaoAtendimento() {
+    var DIAS = [1,2,3,4,5,6], ABRE = 8, FECHA = 19;
+    var QUANDO = ['no domingo', 'na segunda', 'na terça', 'na quarta', 'na quinta', 'na sexta', 'no sábado'];
+    var b = new Date(agora - 3 * 60 * 60 * 1000);
+    var dia = b.getUTCDay();
+    var hora = b.getUTCHours() + b.getUTCMinutes() / 60;
+    var abreHoje = DIAS.indexOf(dia) >= 0;
+    if (abreHoje && hora >= ABRE && hora < FECHA) return { aberto: true, texto: 'Atendimento aberto agora, até as ' + FECHA + 'h' };
+    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: o Manoel responde hoje a partir das ' + ABRE + 'h' };
+    for (var n = 1; n <= 7; n++) {
+      var proximo = (dia + n) % 7;
+      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: o Manoel responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
+    }
+    return { aberto: false, texto: horario.textContent };
   }
 
   // Prazo real, em dias de calendário no horário de Brasília (UTC-3, sem horário de verão).

@@ -75,6 +75,31 @@
     if (faltam) faltam.textContent = textoFaltam(fimTexto);
   }
 
+  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o Manoel volta,
+  // para quem chama à noite não achar que ninguém atende. Sem JS, fica o horário por extenso.
+  var horario = document.querySelector('[data-horario]');
+  if (horario) {
+    var situacao = situacaoAtendimento();
+    horario.textContent = situacao.texto;
+    if (situacao.aberto) horario.parentNode.classList.add('atendente__horario--aberto');
+  }
+
+  function situacaoAtendimento() {
+    var DIAS = {{DIAS}}, ABRE = {{ABRE}}, FECHA = {{FECHA}};
+    var QUANDO = ['no domingo', 'na segunda', 'na terça', 'na quarta', 'na quinta', 'na sexta', 'no sábado'];
+    var b = new Date(agora - 3 * 60 * 60 * 1000);
+    var dia = b.getUTCDay();
+    var hora = b.getUTCHours() + b.getUTCMinutes() / 60;
+    var abreHoje = DIAS.indexOf(dia) >= 0;
+    if (abreHoje && hora >= ABRE && hora < FECHA) return { aberto: true, texto: 'Atendimento aberto agora, até as ' + FECHA + 'h' };
+    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: o Manoel responde hoje a partir das ' + ABRE + 'h' };
+    for (var n = 1; n <= 7; n++) {
+      var proximo = (dia + n) % 7;
+      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: o Manoel responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
+    }
+    return { aberto: false, texto: horario.textContent };
+  }
+
   // Prazo real, em dias de calendário no horário de Brasília (UTC-3, sem horário de verão).
   function textoFaltam(fimTexto) {
     var hoje = new Date(agora - 3 * 60 * 60 * 1000);

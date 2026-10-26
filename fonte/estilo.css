@@ -69,7 +69,17 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
 .heroi h1 em { font-style: normal; color: var(--laranja); }
 .heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
-.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 12px; }
+.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 10px; }
+
+/* Quem atende: foto pequena, nome e situação do horário, colados ao botão */
+.atendente { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.atendente__foto { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--laranja); }
+.atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.3rem; }
+.atendente__nome { font-size: 0.9rem; line-height: 1.35; color: var(--texto-suave); }
+.atendente__nome strong { color: var(--texto); font-weight: 700; }
+.atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.86rem; color: var(--texto-suave); line-height: 1.4; }
+.atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #B8B8B8; }
+.atendente__horario--aberto .atendente__ponto { background: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
 
 /* Selo da campanha (some sozinho depois do fim) */
 .selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }

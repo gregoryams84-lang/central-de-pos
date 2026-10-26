@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pós-graduação 100% online | Central de Pós · Polo Anhanguera</title>
 <meta name="description" content="Especialização e MBA 100% online, para todo o Brasil. Escolha sua área e fale com o Manoel no WhatsApp: atendimento humano do primeiro oi à matrícula.">
-<meta name="robots" content="noindex">
+
 <link rel="canonical" href="https://centraldepos.com.br/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
@@ -91,7 +91,17 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 .heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
 .heroi h1 em { font-style: normal; color: var(--laranja); }
 .heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
-.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 12px; }
+.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 10px; }
+
+/* Quem atende: foto pequena, nome e situação do horário, colados ao botão */
+.atendente { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.atendente__foto { flex: none; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--laranja); }
+.atendente__foto--letra { display: flex; align-items: center; justify-content: center; background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.3rem; }
+.atendente__nome { font-size: 0.9rem; line-height: 1.35; color: var(--texto-suave); }
+.atendente__nome strong { color: var(--texto); font-weight: 700; }
+.atendente__horario { display: flex; align-items: center; gap: 7px; font-size: 0.86rem; color: var(--texto-suave); line-height: 1.4; }
+.atendente__ponto { flex: none; width: 9px; height: 9px; border-radius: 50%; background: #B8B8B8; }
+.atendente__horario--aberto .atendente__ponto { background: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
 
 /* Selo da campanha (some sozinho depois do fim) */
 .selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }
@@ -190,7 +200,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
   * { transition: none !important; }
 }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","name":"Central de Pós · Polo Anhanguera","legalName":"AUREA EDUCACIONAL LTDA","taxID":"67.140.776/0001-88","url":"https://centraldepos.com.br/","areaServed":"BR","contactPoint":{"@type":"ContactPoint","telephone":"+55-19-99246-7847","contactType":"customer service","availableLanguage":"Portuguese"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Isso é golpe?","acceptedAnswer":{"@type":"Answer","text":"Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."}},{"@type":"Question","name":"Serve para concurso?","acceptedAnswer":{"@type":"Answer","text":"Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso."}},{"@type":"Question","name":"Quanto tempo leva?","acceptedAnswer":{"@type":"Answer","text":"Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."}},{"@type":"Question","name":"Pós EAD tem validade?","acceptedAnswer":{"@type":"Answer","text":"Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."}},{"@type":"Question","name":"Como é a matrícula?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp, com o Manoel, sem ir a lugar nenhum. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Depois, você estuda 100% online, no seu horário."}}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","name":"Central de Pós · Polo Anhanguera","legalName":"AUREA EDUCACIONAL LTDA","taxID":"67.140.776/0001-88","url":"https://centraldepos.com.br/","areaServed":"BR","contactPoint":{"@type":"ContactPoint","telephone":"+55-19-99246-7847","contactType":"customer service","availableLanguage":"Portuguese","hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"08:00","closes":"19:00"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Isso é golpe?","acceptedAnswer":{"@type":"Answer","text":"Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da Universidade Anhanguera-Uniderp, e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."}},{"@type":"Question","name":"Serve para concurso?","acceptedAnswer":{"@type":"Answer","text":"Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso."}},{"@type":"Question","name":"Quanto tempo leva?","acceptedAnswer":{"@type":"Answer","text":"Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."}},{"@type":"Question","name":"Pós EAD tem validade?","acceptedAnswer":{"@type":"Answer","text":"Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."}},{"@type":"Question","name":"Como é a matrícula?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp, com o Manoel, sem ir a lugar nenhum. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Depois, você estuda 100% online, no seu horário."}}]}]}</script>
 </head>
 <body class="com-barra">
 <header class="topo">
@@ -204,9 +214,16 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
     <div class="dentro">
       <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
       <h1>Pós EAD que você <em>confere</em> antes de pagar.</h1>
-      <p class="heroi__sub">Certificado com validade nacional e no mínimo 360 horas. Diga sua área no WhatsApp: o Manoel indica o curso e manda por escrito a instituição e o valor total antes da matrícula.</p>
+      <p class="heroi__sub">Curso e certificado da Universidade Anhanguera-Uniderp, com validade nacional. O Manoel indica o curso e manda por escrito o valor total antes da matrícula.</p>
       <a class="botao" data-whats data-posicao="topo" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
-      <p class="heroi__nota">Quem responde é o Manoel, uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
+      <div class="atendente">
+        <span class="atendente__foto atendente__foto--letra" aria-hidden="true">M</span>
+        <div>
+          <p class="atendente__nome"><strong>Manoel Junior</strong> · especialista em pós</p>
+          <p class="atendente__horario"><span class="atendente__ponto" aria-hidden="true"></span><span data-horario>Atendimento de segunda a sábado, das 8h às 19h</span></p>
+        </div>
+      </div>
+      <p class="heroi__nota">Quem responde é uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
       <div class="selo" data-fim="2026-11-02T23:59:00-03:00">
         <p class="selo__nome">Outubro da Pós · <span data-faltam>até 02/11</span></p>
         <p class="selo__oferta">2ª pós EAD grátis* na compra da 1ª · parcelas a partir de R$ 129,00**</p>
@@ -291,7 +308,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
       <ul class="provas">
         <li class="prova">
           <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg></span>
-          <div><h3>Instituição responsável</h3><p>O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR].</p></div>
+          <div><h3>Instituição responsável</h3><p>O curso e o certificado são da Universidade Anhanguera-Uniderp.</p></div>
         </li>
         <li class="prova">
           <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
@@ -303,7 +320,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
         </li>
         <li class="prova">
           <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
-          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, do primeiro oi à matrícula.</p></div>
+          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, de segunda a sábado, das 8h às 19h.</p></div>
         </li>
       </ul>
     </div>
@@ -313,7 +330,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
     <div class="dentro">
       <h2 class="secao__titulo">Perguntas rápidas</h2>
       <div class="perguntas">
-        <details class="pergunta"><summary>Isso é golpe?</summary><p>Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total.</p></details>
+        <details class="pergunta"><summary>Isso é golpe?</summary><p>Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da Universidade Anhanguera-Uniderp, e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total.</p></details>
         <details class="pergunta"><summary>Serve para concurso?</summary><p>Muitos editais e planos de carreira aceitam especialização como título, mas quem decide é o edital de cada um. Mande o seu para o Manoel conferir antes de escolher o curso.</p></details>
         <details class="pergunta"><summary>Quanto tempo leva?</summary><p>Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem.</p></details>
         <details class="pergunta"><summary>Pós EAD tem validade?</summary><p>Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista.</p></details>
@@ -333,7 +350,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outlin
 <footer class="rodape">
   <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
   <p>Polo parceiro da Anhanguera · AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
-  <p>Instituição responsável pelos cursos: [INSTITUIÇÃO A CONFIRMAR]</p>
+  <p>Instituição responsável pelos cursos: Universidade Anhanguera-Uniderp</p>
   <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
 </footer>
 <a class="barra-whats" data-whats data-posicao="barra" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
@@ -445,6 +462,31 @@ var LINK_CURTO = (function () {
     if (!(agora <= Date.parse(fimTexto))) { selos[j].parentNode.removeChild(selos[j]); continue; }
     var faltam = selos[j].querySelector('[data-faltam]');
     if (faltam) faltam.textContent = textoFaltam(fimTexto);
+  }
+
+  // Horário do atendimento pelo relógio de Brasília: diz se está aberto agora ou quando o Manoel volta,
+  // para quem chama à noite não achar que ninguém atende. Sem JS, fica o horário por extenso.
+  var horario = document.querySelector('[data-horario]');
+  if (horario) {
+    var situacao = situacaoAtendimento();
+    horario.textContent = situacao.texto;
+    if (situacao.aberto) horario.parentNode.classList.add('atendente__horario--aberto');
+  }
+
+  function situacaoAtendimento() {
+    var DIAS = [1,2,3,4,5,6], ABRE = 8, FECHA = 19;
+    var QUANDO = ['no domingo', 'na segunda', 'na terça', 'na quarta', 'na quinta', 'na sexta', 'no sábado'];
+    var b = new Date(agora - 3 * 60 * 60 * 1000);
+    var dia = b.getUTCDay();
+    var hora = b.getUTCHours() + b.getUTCMinutes() / 60;
+    var abreHoje = DIAS.indexOf(dia) >= 0;
+    if (abreHoje && hora >= ABRE && hora < FECHA) return { aberto: true, texto: 'Atendimento aberto agora, até as ' + FECHA + 'h' };
+    if (abreHoje && hora < ABRE) return { aberto: false, texto: 'Pode mandar: o Manoel responde hoje a partir das ' + ABRE + 'h' };
+    for (var n = 1; n <= 7; n++) {
+      var proximo = (dia + n) % 7;
+      if (DIAS.indexOf(proximo) >= 0) return { aberto: false, texto: 'Pode mandar: o Manoel responde ' + (n === 1 ? 'amanhã' : QUANDO[proximo]) + ' a partir das ' + ABRE + 'h' };
+    }
+    return { aberto: false, texto: horario.textContent };
   }
 
   // Prazo real, em dias de calendário no horário de Brasília (UTC-3, sem horário de verão).

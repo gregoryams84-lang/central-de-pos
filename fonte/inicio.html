@@ -3,9 +3,16 @@
     <div class="dentro">
       <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
       <h1>Pós EAD que você <em>confere</em> antes de pagar.</h1>
-      <p class="heroi__sub">Certificado com validade nacional e no mínimo 360 horas. Diga sua área no WhatsApp: o Manoel indica o curso e manda por escrito a instituição e o valor total antes da matrícula.</p>
+      <p class="heroi__sub">Curso e certificado da {{INSTITUICAO}}, com validade nacional. O Manoel indica o curso e manda por escrito o valor total antes da matrícula.</p>
       <a class="botao" data-whats data-posicao="topo" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar com o Manoel no WhatsApp</span></a>
-      <p class="heroi__nota">Quem responde é o Manoel, uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
+      <div class="atendente">
+        {{FOTO}}
+        <div>
+          <p class="atendente__nome"><strong>{{ATENDENTE}}</strong> · especialista em pós</p>
+          <p class="atendente__horario"><span class="atendente__ponto" aria-hidden="true"></span><span data-horario>Atendimento {{ATENDIMENTO}}</span></p>
+        </div>
+      </div>
+      <p class="heroi__nota">Quem responde é uma pessoa. Conversar não faz matrícula nem gera cobrança.</p>
       {{SELO}}
     </div>
   </section>
@@ -54,7 +61,7 @@
         </li>
         <li class="prova">
           <span class="prova__icone">{{ICONE_PESSOA}}</span>
-          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, do primeiro oi à matrícula.</p></div>
+          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, {{ATENDIMENTO}}.</p></div>
         </li>
       </ul>
     </div>

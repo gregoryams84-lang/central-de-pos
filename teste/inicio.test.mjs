@@ -35,7 +35,11 @@ function abrir(html, { search = '', agora = ANTES_DO_FIM, guardado = {}, storage
   const botoes = [...html.matchAll(/<a [^>]*data-whats[^>]*>/g)].map((m) => elemento(m[0]));
   const selos = [...html.matchAll(/<div [^>]*data-fim[^>]*>/g)].map((m) => elemento(m[0]));
   const dados = { ...guardado };
-  const r = { botoes, selos, beacons: [], eventos: [], dados };
+  const classesHorario = [];
+  const horario = /data-horario/.test(html)
+    ? { textContent: html.match(/<span data-horario>([^<]*)<\/span>/)[1], parentNode: { classList: { add: (c) => classesHorario.push(c) } } }
+    : null;
+  const r = { botoes, selos, beacons: [], eventos: [], dados, horario, classesHorario };
   class DataFixa extends Date { static now() { return agora; } }
   const janela = {
     URLSearchParams, JSON, Blob, String, Date: DataFixa,
@@ -47,7 +51,7 @@ function abrir(html, { search = '', agora = ANTES_DO_FIM, guardado = {}, storage
     },
     document: {
       querySelectorAll: (sel) => (sel === '[data-whats]' ? botoes : sel === '[data-fim]' ? selos : []),
-      querySelector: () => null,
+      querySelector: (sel) => (sel === '[data-horario]' ? horario : null),
       getElementById: () => null,
     },
   };
@@ -158,4 +162,22 @@ test('o selo conta os dias que faltam pelo calendário de Brasília', () => {
   assert.equal(faltam('2026-11-01T00:10:00-03:00'), 'termina amanhã, 02/11, às 23h59');
   assert.equal(faltam('2026-11-02T08:00:00-03:00'), 'termina hoje às 23h59');
   assert.equal(faltam('2026-11-02T23:58:00-03:00'), 'termina hoje às 23h59');
+});
+
+test('o horário diz se o atendimento está aberto agora ou quando o Manoel volta (Brasília)', () => {
+  const situacao = (quando) => abrir(html, { agora: Date.parse(quando) });
+  const segundaCedo = situacao('2026-10-26T10:00:00-03:00'); // 26/10/2026 é segunda
+  assert.equal(segundaCedo.horario.textContent, 'Atendimento aberto agora, até as 19h');
+  assert.deepEqual(segundaCedo.classesHorario, ['atendente__horario--aberto']);
+  assert.equal(situacao('2026-10-26T07:30:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde hoje a partir das 8h');
+  const segundaNoite = situacao('2026-10-26T19:00:00-03:00');
+  assert.equal(segundaNoite.horario.textContent, 'Pode mandar: o Manoel responde amanhã a partir das 8h');
+  assert.deepEqual(segundaNoite.classesHorario, []);
+  assert.equal(situacao('2026-10-31T20:00:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde na segunda a partir das 8h');
+  assert.equal(situacao('2026-11-01T12:00:00-03:00').horario.textContent, 'Pode mandar: o Manoel responde amanhã a partir das 8h');
+});
+
+test('sem JS, o horário sai por extenso e a instituição aparece no topo', () => {
+  assert.match(html, /<span data-horario>Atendimento de segunda a sábado, das 8h às 19h<\/span>/);
+  assert.match(html, /Curso e certificado da Universidade Anhanguera-Uniderp/);
 });

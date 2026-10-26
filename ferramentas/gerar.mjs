@@ -109,7 +109,8 @@ function montarJsonLd(config, perguntas) {
         taxID: config.empresa.cnpj,
         url: config.site + '/',
         areaServed: 'BR',
-        contactPoint: { '@type': 'ContactPoint', telephone: `+${w.slice(0, 2)}-${w.slice(2, 4)}-${w.slice(4, -4)}-${w.slice(-4)}`, contactType: 'customer service', availableLanguage: 'Portuguese' },
+        contactPoint: { '@type': 'ContactPoint', telephone: `+${w.slice(0, 2)}-${w.slice(2, 4)}-${w.slice(4, -4)}-${w.slice(-4)}`, contactType: 'customer service', availableLanguage: 'Portuguese',
+          hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: config.atendimento.dias.map((d) => DIAS_SCHEMA[d]), opens: hora(config.atendimento.abre), closes: hora(config.atendimento.fecha) } },
       },
       {
         '@type': 'FAQPage',
@@ -124,6 +125,17 @@ function montarJsonLd(config, perguntas) {
   return `<script type="application/ld+json">${JSON.stringify(dados).replace(/</g, '\\u003c')}</script>`;
 }
 
+// Foto do atendente (manoel.webp na raiz, só o rosto, sem logo). Sem o arquivo, um círculo com a inicial.
+function montarFoto(config) {
+  const nome = escaparHtml(config.atendimento.nome);
+  return existsSync(new URL('manoel.webp', raiz))
+    ? `<img class="atendente__foto" src="/manoel.webp" width="52" height="52" alt="${nome}">`
+    : `<span class="atendente__foto atendente__foto--letra" aria-hidden="true">${nome.charAt(0)}</span>`;
+}
+
+const DIAS_SCHEMA = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const hora = (h) => `${String(h).padStart(2, '0')}:00`;
+
 const BARRA = (config) => `<a class="barra-whats" data-whats data-posicao="barra" href="${linkWhats(config, '')}" rel="noopener">${ICONES.ICONE}<span>Falar com o Manoel no WhatsApp</span></a>`;
 
 function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '', barra = '', jsonld = '' }) {
@@ -133,6 +145,9 @@ function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '',
   const comuns = {
     ...ICONES,
     WHATS_SITE: linkWhats(config, ''),
+    ATENDENTE: escaparHtml(config.atendimento.nome),
+    ATENDIMENTO: escaparHtml(config.atendimento.texto),
+    FOTO: montarFoto(config),
     INSTITUICAO: instituicao(config),
     RAZAO: config.empresa.razao,
     CNPJ: config.empresa.cnpj,
@@ -150,7 +165,13 @@ function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '',
     CONTEUDO: preencher(conteudo, comuns).trim(),
     BARRA: barra,
     LOGICA: logica,
-    PAGINA: preencher(ler('fonte/pagina.js').trim(), { WHATSAPP: config.whatsapp, REGISTRO: config.registroCliques }),
+    PAGINA: preencher(ler('fonte/pagina.js').trim(), {
+      WHATSAPP: config.whatsapp,
+      REGISTRO: config.registroCliques,
+      DIAS: JSON.stringify(config.atendimento.dias),
+      ABRE: String(config.atendimento.abre),
+      FECHA: String(config.atendimento.fecha),
+    }),
   });
   const sobrou = pagina.match(/\{\{[A-Z_]+\}\}/);
   if (sobrou) throw new Error(`${caminho || 'index'}: marcador sem valor ${sobrou[0]}`);

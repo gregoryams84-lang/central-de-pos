@@ -2,7 +2,14 @@
   "whatsapp": "5519992467847",
   "registroCliques": "",
   "site": "https://centraldepos.com.br",
-  "instituicao": "",
+  "instituicao": "Universidade Anhanguera-Uniderp",
+  "atendimento": {
+    "nome": "Manoel Junior",
+    "texto": "de segunda a sábado, das 8h às 19h",
+    "dias": [1, 2, 3, 4, 5, 6],
+    "abre": 8,
+    "fecha": 19
+  },
   "empresa": { "razao": "AUREA EDUCACIONAL LTDA", "cnpj": "67.140.776/0001-88" },
   "links": [
     { "caminho": "instagram", "codigo": "IG00" },
