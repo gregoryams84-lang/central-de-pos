@@ -6,7 +6,8 @@ import { readFileSync } from 'node:fs';
 
 const raiz = new URL('..', import.meta.url);
 const config = JSON.parse(readFileSync(new URL('fonte/config.json', raiz), 'utf8'));
-const paginas = ['index.html', ...config.links.map((l) => `${l.caminho}/index.html`)];
+const links = config.links.map((l) => `${l.caminho}/index.html`);
+const paginas = ['index.html', 'privacidade/index.html', 'termos/index.html', ...links];
 const ler = (p) => readFileSync(new URL(p, raiz), 'utf8');
 // Texto que a pessoa vê: sem tags, sem script/style.
 const visivel = (html) => html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
@@ -29,8 +30,18 @@ for (const pagina of paginas) {
     for (const n of numeros) assert.equal(n, config.whatsapp);
   });
 
-  test(`${pagina}: fora da busca por enquanto`, () => {
-    assert.match(ler(pagina), /<meta name="robots" content="noindex">/);
+  test(`${pagina}: sem frase proibida de educação regulada`, () => {
+    // Pós lato sensu não tem "reconhecimento" por curso; e nada de promessa de emprego ou salário.
+    assert.doesNotMatch(visivel(ler(pagina)), /reconhecid[oa] pelo MEC|garant\w* (de )?(emprego|vaga|salário|aprovação)/i);
+  });
+
+  test(`${pagina}: link curto fora da busca sempre; o resto, até a instituição ser confirmada`, () => {
+    const foraDaBusca = links.includes(pagina) || !config.instituicao;
+    assert.equal(/<meta name="robots" content="noindex">/.test(ler(pagina)), foraDaBusca);
+  });
+
+  test(`${pagina}: instituição responsável confirmada`, { todo: !config.instituicao && 'falta confirmar a instituição em fonte/config.json' }, () => {
+    assert.doesNotMatch(ler(pagina), /INSTITUIÇÃO A CONFIRMAR/);
   });
 }
 

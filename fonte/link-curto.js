@@ -12,13 +12,13 @@ var LINK_CURTO = (function () {
     return CODIGO_VIDEO.test(c) || CODIGO_PALAVRA.test(c) ? c : '';
   }
 
-  function mensagem(codigo) {
-    var rede = REDES[codigo.slice(0, 2)];
+  // codigo 'SITE' = chegou sem código de rede. area: nome de exibição, nos botões das áreas.
+  function mensagem(codigo, area) {
     var video = CODIGO_VIDEO.exec(codigo);
-    if (video && video[2] !== '00') {
-      return 'Oi! Vi o vídeo no ' + rede + ' e quero saber da pós (' + codigo + ')';
-    }
-    return 'Oi! Vim pelo ' + rede + ' e quero saber da pós (' + codigo + ')';
+    var origem = codigo === 'SITE' ? 'Vim pelo site'
+      : video && video[2] !== '00' ? 'Vi o vídeo no ' + REDES[video[1]]
+      : 'Vim pelo ' + REDES[codigo.slice(0, 2)];
+    return 'Oi! ' + origem + ' e quero saber da pós' + (area ? ' em ' + area : '') + ' (' + codigo + ')';
   }
 
   function destino(numero, codigoPadrao, search) {

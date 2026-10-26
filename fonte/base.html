@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{TITULO}}</title>
+<meta name="description" content="{{DESCRICAO}}">
+{{ROBOTS}}
+<link rel="canonical" href="{{URL}}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Central de Pós · Polo Anhanguera">
+<meta property="og:title" content="{{TITULO}}">
+<meta property="og:description" content="{{DESCRICAO}}">
+<meta property="og:url" content="{{URL}}">
+{{OG_IMAGEM}}
+<meta name="theme-color" content="#F94D12">
+<link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+{{ESTILO}}
+</style>
+{{JSONLD}}
+</head>
+<body class="{{CLASSE}}">
+<header class="topo">
+  <div class="topo__dentro">
+    <a class="marca" href="/">Central de Pós <span aria-hidden="true">·</span> Polo Anhanguera</a>
+    <a class="topo__whats" data-whats data-posicao="cabecalho" href="{{WHATS_SITE}}" rel="noopener">{{ICONE}}<span>Falar no WhatsApp</span></a>
+  </div>
+</header>
+{{CONTEUDO}}
+<footer class="rodape">
+  <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
+  <p>Polo parceiro da Anhanguera · {{RAZAO}} · CNPJ {{CNPJ}}</p>
+  <p>Instituição responsável pelos cursos: {{INSTITUICAO}}</p>
+  <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
+</footer>
+{{BARRA}}
+<script>
+{{LOGICA}}
+{{PAGINA}}
+</script>
+</body>
+</html>

@@ -57,3 +57,16 @@ test('nomes das 5 redes', () => {
     assert.equal(texto(destino(NUMERO, sigla + '00', '')), `Oi! Vim pelo ${nome} e quero saber da pós (${sigla}00)`);
   }
 });
+
+test('mensagem de quem chega pelo site, sem código de rede', () => {
+  const { mensagem } = contexto.LINK_CURTO;
+  assert.equal(mensagem('SITE'), 'Oi! Vim pelo site e quero saber da pós (SITE)');
+  assert.equal(mensagem('SITE', 'Direito'), 'Oi! Vim pelo site e quero saber da pós em Direito (SITE)');
+});
+
+test('botão de área põe a área na mensagem', () => {
+  const { mensagem } = contexto.LINK_CURTO;
+  assert.equal(mensagem('KW07', 'Educação'), 'Oi! Vi o vídeo no Kwai e quero saber da pós em Educação (KW07)');
+  assert.equal(mensagem('IG00', 'Negócios e MBA'), 'Oi! Vim pelo Instagram e quero saber da pós em Negócios e MBA (IG00)');
+  assert.equal(mensagem('FBMBA', 'Direito'), 'Oi! Vim pelo Facebook e quero saber da pós em Direito (FBMBA)');
+});

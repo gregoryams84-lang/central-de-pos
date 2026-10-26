@@ -2,78 +2,474 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Central de Pós · Polo Anhanguera</title>
-<meta name="description" content="Pós-graduação 100% online para todo o Brasil, com atendimento humano pelo WhatsApp. Central de Pós · Polo Anhanguera.">
-<!-- Página provisória até o site da pós ficar pronto: fora da busca por enquanto. -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pós-graduação 100% online | Central de Pós · Polo Anhanguera</title>
+<meta name="description" content="Especialização e MBA 100% online, para todo o Brasil. Escolha sua área e fale com o Manoel no WhatsApp: atendimento humano do primeiro oi à matrícula.">
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://centraldepos.com.br/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Central de Pós · Polo Anhanguera">
+<meta property="og:title" content="Pós-graduação 100% online | Central de Pós · Polo Anhanguera">
+<meta property="og:description" content="Especialização e MBA 100% online, para todo o Brasil. Escolha sua área e fale com o Manoel no WhatsApp: atendimento humano do primeiro oi à matrícula.">
+<meta property="og:url" content="https://centraldepos.com.br/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#F94D12">
+<link rel="preload" href="/fontes/montserrat-700.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  :root {
-    --laranja: #F94D12;
-    --laranja-forte: #D63E0B;
-    --texto: #1D1D1D;
-    --texto-suave: #5A5A5A;
-    --fundo: #FCFCFC;
-    --linha: #E6E6E6;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: var(--fundo);
-    color: var(--texto);
-    font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", sans-serif;
-    line-height: 1.6;
-  }
-  main { flex: 1; width: 100%; max-width: 640px; margin: 0 auto; padding: 56px 20px 40px; }
-  .marca { font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; margin: 0 0 40px; }
-  .marca span { color: var(--laranja); }
-  .rotulo { font-size: 0.85rem; font-weight: 600; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 12px; }
-  h1 { font-size: clamp(1.75rem, 6vw, 2.4rem); line-height: 1.2; margin: 0 0 16px; font-weight: 700; }
-  p.sub { font-size: 1.05rem; color: var(--texto-suave); margin: 0 0 32px; }
-  .botao {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; max-width: 360px; min-height: 56px; padding: 14px 24px;
-    background: var(--laranja); color: #fff; text-decoration: none;
-    font-weight: 700; font-size: 1.05rem; border-radius: 12px;
-    transition: background-color 0.2s ease;
-  }
-  .botao:hover, .botao:focus-visible { background: var(--laranja-forte); }
-  .botao:focus-visible { outline: 3px solid var(--texto); outline-offset: 3px; }
-  .nota { font-size: 0.9rem; color: var(--texto-suave); margin: 14px 0 0; }
-  footer { border-top: 1px solid var(--linha); padding: 20px; font-size: 0.8rem; color: var(--texto-suave); text-align: center; }
-  footer p { margin: 4px 0; }
+/* Central de Pós: celular primeiro. Fonte própria (sem Google Fonts: mais rápido e sem terceiro).
+   Laranja #F94D12 é o único acento; --laranja-texto é o mesmo tom escurecido para texto pequeno
+   passar no contraste mínimo (4,5:1) sobre o fundo claro. */
+@font-face { font-family: 'Montserrat'; font-weight: 400; font-display: swap; src: url('/fontes/montserrat-400.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 600; font-display: swap; src: url('/fontes/montserrat-600.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 700; font-display: swap; src: url('/fontes/montserrat-700.woff2') format('woff2'); }
+
+:root {
+  --laranja: #F94D12;
+  --laranja-forte: #D63E0B;
+  --laranja-texto: #C2390A;
+  --laranja-fundo: #FFF1EA;
+  --texto: #1D1D1D;
+  --texto-suave: #555555;
+  --fundo: #FCFCFC;
+  --cartao: #FFFFFF;
+  --linha: #E6E6E6;
+  --raio: 14px;
+  --largura: 1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--laranja-texto); }
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+p { margin: 0; }
+.dentro { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 20px; }
+.secao { padding: 48px 0; }
+.secao__titulo { font-size: clamp(1.5rem, 5.5vw, 2.1rem); font-weight: 700; margin-bottom: 10px; }
+.secao__sub { color: var(--texto-suave); margin-bottom: 24px; max-width: 640px; }
+
+/* Cabeçalho fixo no topo */
+.topo { position: sticky; top: 0; z-index: 20; background: rgba(252, 252, 252, 0.96); border-bottom: 1px solid var(--linha); }
+.topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 56px; padding: 8px 20px; }
+.marca { color: var(--texto); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; text-decoration: none; }
+.marca span { color: var(--laranja); }
+.topo__whats { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 999px; background: var(--laranja); color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; }
+.topo__whats svg { width: 18px; height: 18px; flex: none; }
+/* No celular a barra de baixo faz esse papel. */
+.com-barra .topo__whats { display: none; }
+
+/* Botão principal */
+.botao {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; max-width: 420px; min-height: 60px; padding: 14px 22px;
+  border-radius: var(--raio); background: var(--laranja); color: #fff;
+  font-weight: 700; font-size: 1.2rem; line-height: 1.25; text-align: center; text-decoration: none;
+  box-shadow: 0 6px 18px rgba(249, 77, 18, 0.28);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.botao svg { width: 24px; height: 24px; flex: none; }
+.botao:hover { background: var(--laranja-forte); }
+.botao:active { transform: scale(0.98); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outline-offset: 3px; }
+
+/* Topo da página */
+.heroi { padding: 28px 0 36px; }
+.rotulo { font-size: 0.78rem; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
+.heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
+.heroi h1 em { font-style: normal; color: var(--laranja); }
+.heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
+.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 12px; }
+
+/* Selo da campanha (some sozinho depois do fim) */
+.selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }
+.selo__nome { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--laranja-texto); margin-bottom: 4px; }
+.selo__oferta { font-weight: 700; font-size: 1.02rem; }
+.selo__notas { margin-top: 8px; font-size: 0.74rem; line-height: 1.5; color: var(--texto-suave); }
+.selo__notas p + p { margin-top: 4px; }
+
+/* Fatos */
+.fatos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fatos li { padding: 6px 12px; border: 1px solid var(--linha); border-radius: 999px; background: var(--cartao); font-size: 0.85rem; font-weight: 600; }
+
+/* Áreas */
+.areas { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.area {
+  display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 16px;
+  border: 1px solid var(--linha); border-radius: var(--raio); background: var(--cartao);
+  color: var(--texto); text-decoration: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.area:hover { border-color: var(--laranja); box-shadow: 0 4px 16px rgba(29, 29, 29, 0.06); }
+.area__topo { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.area__nome { font-weight: 700; font-size: 1.08rem; line-height: 1.3; }
+.area__qtd { flex: none; font-size: 0.82rem; font-weight: 700; color: var(--laranja-texto); }
+.area__ex { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5; }
+.area__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 0.95rem; color: var(--laranja-texto); }
+.area__cta svg { width: 18px; height: 18px; }
+.areas__nota { margin-top: 18px; color: var(--texto-suave); font-size: 0.95rem; }
+.areas__nota a { font-weight: 700; }
+
+/* Confiança */
+.confianca { background: var(--cartao); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
+.provas { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.prova { display: flex; gap: 14px; }
+.prova__icone { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--laranja-fundo); color: var(--laranja-texto); display: flex; align-items: center; justify-content: center; }
+.prova__icone svg { width: 20px; height: 20px; }
+.prova h3 { font-size: 1.02rem; margin-bottom: 4px; }
+.prova p { font-size: 0.93rem; color: var(--texto-suave); }
+
+/* Perguntas */
+.perguntas { max-width: 760px; }
+.pergunta { border-bottom: 1px solid var(--linha); }
+.pergunta summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 14px 0; font-weight: 700; font-size: 1.02rem; cursor: pointer; list-style: none; }
+.pergunta summary::-webkit-details-marker { display: none; }
+.pergunta summary::after { content: '+'; flex: none; font-size: 1.5rem; font-weight: 400; color: var(--laranja-texto); line-height: 1; }
+.pergunta[open] summary::after { content: '–'; }
+.pergunta p { padding: 0 0 18px; color: var(--texto-suave); font-size: 0.96rem; }
+
+/* Chamada final */
+.final { background: var(--texto); color: #fff; text-align: center; }
+.final .secao__titulo { color: #fff; }
+.final .secao__sub { color: #D6D6D6; margin-left: auto; margin-right: auto; }
+.final .botao { margin: 0 auto; }
+
+/* Rodapé */
+.rodape { padding: 28px 20px; text-align: center; font-size: 0.8rem; color: var(--texto-suave); border-top: 1px solid var(--linha); }
+.rodape p + p { margin-top: 6px; }
+.rodape__marca { font-weight: 700; color: var(--texto); }
+
+/* Barra fixa do WhatsApp no celular */
+.barra-whats {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 60px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.12rem; text-decoration: none;
+  box-shadow: 0 -4px 16px rgba(29, 29, 29, 0.12);
+  transition: transform 0.2s ease;
+}
+.barra-whats svg { width: 24px; height: 24px; flex: none; }
+.barra-whats--fora { transform: translateY(110%); }
+.area--destaque { border-color: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
+.com-barra { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+/* Páginas de texto (privacidade, termos) */
+.texto { max-width: 760px; padding-top: 32px; padding-bottom: 48px; }
+.texto h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 8px; }
+.texto h2 { font-size: 1.15rem; margin: 28px 0 8px; }
+.texto p, .texto li { color: #333; }
+.texto p + p { margin-top: 10px; }
+.texto ul { padding-left: 20px; margin: 8px 0 0; }
+.texto .atualizado { color: var(--texto-suave); font-size: 0.88rem; }
+
+@media (min-width: 640px) {
+  .areas { grid-template-columns: repeat(2, 1fr); }
+  .provas { grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+  .secao { padding: 64px 0; }
+  .heroi { padding: 56px 0 56px; }
+}
+@media (min-width: 960px) {
+  .areas { grid-template-columns: repeat(3, 1fr); }
+  .provas { grid-template-columns: repeat(4, 1fr); }
+  .com-barra .topo__whats { display: inline-flex; }
+  .barra-whats { display: none; }
+  .com-barra { padding-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"EducationalOrganization","name":"Central de Pós · Polo Anhanguera","legalName":"AUREA EDUCACIONAL LTDA","taxID":"67.140.776/0001-88","url":"https://centraldepos.com.br/","areaServed":"BR","contactPoint":{"@type":"ContactPoint","telephone":"+55-19-99246-7847","contactType":"customer service","availableLanguage":"Portuguese"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Isso é golpe?","acceptedAnswer":{"@type":"Answer","text":"Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total."}},{"@type":"Question","name":"Preciso ir ao polo?","acceptedAnswer":{"@type":"Answer","text":"Não. A pós é 100% online: você faz a matrícula pelo WhatsApp e estuda de onde estiver, no seu horário."}},{"@type":"Question","name":"Quanto tempo leva?","acceptedAnswer":{"@type":"Answer","text":"Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem."}},{"@type":"Question","name":"Pós EAD tem validade?","acceptedAnswer":{"@type":"Answer","text":"Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista."}},{"@type":"Question","name":"Como é a matrícula?","acceptedAnswer":{"@type":"Answer","text":"Pelo WhatsApp, com o Manoel. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Você não preenche nada neste site."}}]}]}</script>
 </head>
-<body>
+<body class="com-barra">
+<header class="topo">
+  <div class="topo__dentro">
+    <a class="marca" href="/">Central de Pós <span aria-hidden="true">·</span> Polo Anhanguera</a>
+    <a class="topo__whats" data-whats data-posicao="cabecalho" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar no WhatsApp</span></a>
+  </div>
+</header>
 <main>
-  <p class="marca">Central de Pós <span>·</span> Polo Anhanguera</p>
-  <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
-  <h1>Sua pós-graduação começa com uma conversa.</h1>
-  <p class="sub">Fale com o Manoel, especialista em pós, pelo WhatsApp. Ele tira suas dúvidas e indica o curso certo para o seu objetivo. Atendimento humano, do começo ao fim.</p>
-  <a class="botao" id="whatsapp" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">Falar com o Manoel no WhatsApp</a>
-  <p class="nota">Tudo online: você não precisa ir a lugar nenhum.</p>
+  <section class="heroi">
+    <div class="dentro">
+      <p class="rotulo">Pós 100% online · Especialização e MBA · para todo o Brasil</p>
+      <h1>Pós-graduação online, com <em>gente de verdade</em> te atendendo.</h1>
+      <p class="heroi__sub">Diga sua área e seu objetivo no WhatsApp. O Manoel indica o curso, passa o valor exato e faz sua matrícula com você.</p>
+      <a class="botao" data-whats data-posicao="topo" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
+      <p class="heroi__nota">Quem responde é uma pessoa, não um robô · sem compromisso</p>
+      <div class="selo" data-fim="2026-11-02T23:59:00-03:00">
+        <p class="selo__nome">Outubro da Pós · <span data-faltam>até 02/11</span></p>
+        <p class="selo__oferta">2ª pós EAD grátis* · parcelas a partir de R$ 129,00**</p>
+        <div class="selo__notas"><p>* A 2ª pós EAD, de valor igual ou menor, é liberada conforme o regulamento: no cartão de crédito (exceto recorrente) ou à vista, a partir do 10º dia útil após a compra; no boleto, Pix ou cartão recorrente, depois de concluir a 1ª pós. Regulamento completo com o Manoel.</p><p>** Categoria Tradicional. O valor total e o número de parcelas do seu curso o Manoel informa antes da matrícula.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dentro" aria-label="Em números">
+    <ul class="fatos">
+      <li>Mais de 780 cursos</li>
+      <li>9 áreas</li>
+      <li>De 4 a 12 meses</li>
+      <li>Mínimo de 360 h</li>
+      <li>Validade nacional</li>
+    </ul>
+  </section>
+
+  <section class="secao" id="areas">
+    <div class="dentro">
+      <h2 class="secao__titulo">Escolha sua área</h2>
+      <p class="secao__sub">Toque na sua área: o Manoel já recebe o assunto e responde com as opções de curso.</p>
+      <div class="areas">
+        <a class="area" id="area-negocios" data-whats data-area="Negócios e MBA" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Neg%C3%B3cios%20e%20MBA%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Negócios e MBA</span><span class="area__qtd">199 cursos</span></span>
+          <span class="area__ex">MBA em Gestão de Pessoas · MBA em Gestão de Recursos Humanos e Departamento Pessoal · MBA em Finanças, Auditoria e Controladoria</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-educacao" data-whats data-area="Educação" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Educa%C3%A7%C3%A3o%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Educação</span><span class="area__qtd">148 cursos</span></span>
+          <span class="area__ex">Neuropsicopedagogia · Psicopedagogia Clínica e Institucional · Educação Especial e Inclusiva</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-engenharia" data-whats data-area="Engenharia e Arquitetura" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Engenharia%20e%20Arquitetura%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Engenharia e Arquitetura</span><span class="area__qtd">132 cursos</span></span>
+          <span class="area__ex">Engenharia de Segurança do Trabalho · MBA em Logística e Supply Chain Management · Arquitetura sustentável</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-tecnologia" data-whats data-area="Ciências, Exatas e Tecnologia" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Ci%C3%AAncias%2C%20Exatas%20e%20Tecnologia%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Ciências, Exatas e Tecnologia</span><span class="area__qtd">119 cursos</span></span>
+          <span class="area__ex">Ciência de Dados e Inteligência Artificial · Engenharia de Software · Gestão de Projetos Com Inteligência Artificial</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-saude" data-whats data-area="Saúde, Esporte e Estética" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Sa%C3%BAde%2C%20Esporte%20e%20Est%C3%A9tica%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Saúde, Esporte e Estética</span><span class="area__qtd">116 cursos</span></span>
+          <span class="area__ex">Enfermagem em Urgência e Emergência · Enfermagem do Trabalho · Nutrição Esportiva e Performance</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-direito" data-whats data-area="Direito" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Direito%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Direito</span><span class="area__qtd">24 cursos</span></span>
+          <span class="area__ex">Direito Penal e Processo Penal · Direito Previdenciário: Teoria e Prática · Direito Tributário</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-sociais" data-whats data-area="Ciências Sociais, Serviços e Outros" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Ci%C3%AAncias%20Sociais%2C%20Servi%C3%A7os%20e%20Outros%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Ciências Sociais, Serviços e Outros</span><span class="area__qtd">26 cursos</span></span>
+          <span class="area__ex">Psicologia Organizacional · Serviço Social e gestão de projetos sociais · Gestão de Eventos</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-comunicacao" data-whats data-area="Comunicação, Artes e Humanidades" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Comunica%C3%A7%C3%A3o%2C%20Artes%20e%20Humanidades%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Comunicação, Artes e Humanidades</span><span class="area__qtd">16 cursos</span></span>
+          <span class="area__ex">Comunicação e Oratória · Design de produtos digitais - UX-UI · Influência digital e personal branding</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="area" id="area-agro" data-whats data-area="Agricultura e Veterinária" data-posicao="area" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20em%20Agricultura%20e%20Veterin%C3%A1ria%20(SITE)" rel="noopener">
+          <span class="area__topo"><span class="area__nome">Agricultura e Veterinária</span><span class="area__qtd">7 cursos</span></span>
+          <span class="area__ex">MBA em Agronegócios · Agricultura de precisão · ESG no Agronegócio</span>
+          <span class="area__cta">Ver cursos no WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+      <p class="areas__nota">Não achou o seu curso? <a data-whats data-posicao="nao-achou" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener">Pergunte ao Manoel</a>: ele procura entre todos os cursos.</p>
+    </div>
+  </section>
+
+  <section class="secao confianca">
+    <div class="dentro">
+      <h2 class="secao__titulo">Pode confiar</h2>
+      <ul class="provas">
+        <li class="prova">
+          <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg></span>
+          <div><h3>Instituição responsável</h3><p>O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR].</p></div>
+        </li>
+        <li class="prova">
+          <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+          <div><h3>Validade nacional</h3><p>Especialização de no mínimo 360 horas, com certificado válido em todo o Brasil (Resolução CNE/CES nº 1/2018).</p></div>
+        </li>
+        <li class="prova">
+          <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5l8-3 8 3v16M9 21v-5h6v5M8 9h.01M12 9h.01M16 9h.01M8 13h.01M12 13h.01M16 13h.01"/></svg></span>
+          <div><h3>Polo parceiro da Anhanguera</h3><p>A matrícula é feita pelo sistema do polo. AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88.</p></div>
+        </li>
+        <li class="prova">
+          <span class="prova__icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></span>
+          <div><h3>Gente de verdade</h3><p>Quem responde é o Manoel, especialista em pós, do primeiro oi à matrícula.</p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="secao">
+    <div class="dentro">
+      <h2 class="secao__titulo">Perguntas rápidas</h2>
+      <div class="perguntas">
+        <details class="pergunta"><summary>Isso é golpe?</summary><p>Não. Somos um polo parceiro da Anhanguera, da empresa AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88. O curso e o certificado são da [INSTITUIÇÃO A CONFIRMAR], e a matrícula é feita pelo sistema do polo. Antes de pagar, você recebe por escrito o nome do curso, a carga horária e o valor total.</p></details>
+        <details class="pergunta"><summary>Preciso ir ao polo?</summary><p>Não. A pós é 100% online: você faz a matrícula pelo WhatsApp e estuda de onde estiver, no seu horário.</p></details>
+        <details class="pergunta"><summary>Quanto tempo leva?</summary><p>Depende do ritmo que você escolher: 4, 6 ou de 10 a 12 meses, conforme o curso. O Manoel mostra os ritmos que a sua pós tem.</p></details>
+        <details class="pergunta"><summary>Pós EAD tem validade?</summary><p>Tem. Pela Resolução CNE/CES nº 1/2018, a especialização tem no mínimo 360 horas e o certificado tem validade nacional. A pós a distância só pode ser oferecida por instituição credenciada para EAD. Se você precisa do título para um conselho profissional, confirme com o conselho antes de escolher: certificado de especialização não é o mesmo que título de especialista.</p></details>
+        <details class="pergunta"><summary>Como é a matrícula?</summary><p>Pelo WhatsApp, com o Manoel. Ele confirma com você o curso, o ritmo e o valor e faz a matrícula pelo sistema do polo. Você não preenche nada neste site.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao final">
+    <div class="dentro">
+      <h2 class="secao__titulo">Sua área tem pós. Falta só a conversa.</h2>
+      <p class="secao__sub">O Manoel responde você, mostra as opções e passa o valor exato do seu curso.</p>
+      <a class="botao" data-whats data-posicao="final" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
+    </div>
+  </section>
 </main>
-<footer>
-  <p>Central de Pós · Polo Anhanguera · polo parceiro da Anhanguera</p>
-  <p>AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
+<footer class="rodape">
+  <p class="rodape__marca">Central de Pós · Polo Anhanguera</p>
+  <p>Polo parceiro da Anhanguera · AUREA EDUCACIONAL LTDA · CNPJ 67.140.776/0001-88</p>
+  <p>Instituição responsável pelos cursos: [INSTITUIÇÃO A CONFIRMAR]</p>
+  <p><a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos de uso</a></p>
 </footer>
+<a class="barra-whats" data-whats data-posicao="barra" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar com o Manoel no WhatsApp</span></a>
 <script>
-  // Quem já passou por um link curto (ex.: /kwai?c=KW07) mantém o código na conversa.
-  (function () {
+/* Monta o link do WhatsApp do Manoel a partir do código da página e do ?c= da URL.
+   O gerador embute este arquivo em cada página de link curto, para o redirecionamento
+   não esperar o download de outro arquivo. */
+var LINK_CURTO = (function () {
+  var REDES = { IG: 'Instagram', FB: 'Facebook', TT: 'TikTok', KW: 'Kwai', YT: 'YouTube' };
+  // Vídeo: rede + número com 2 dígitos (00 = bio). Palavra-chave: resposta automática do direct/Messenger.
+  var CODIGO_VIDEO = /^(IG|FB|TT|KW|YT)(\d{2})$/;
+  var CODIGO_PALAVRA = /^(IG|FB)(POS|MBA|CONCURSO|CARREIRA)$/;
+
+  function codigoValido(c) {
+    c = String(c || '').trim().toUpperCase();
+    return CODIGO_VIDEO.test(c) || CODIGO_PALAVRA.test(c) ? c : '';
+  }
+
+  // codigo 'SITE' = chegou sem código de rede. area: nome de exibição, nos botões das áreas.
+  function mensagem(codigo, area) {
+    var video = CODIGO_VIDEO.exec(codigo);
+    var origem = codigo === 'SITE' ? 'Vim pelo site'
+      : video && video[2] !== '00' ? 'Vi o vídeo no ' + REDES[video[1]]
+      : 'Vim pelo ' + REDES[codigo.slice(0, 2)];
+    return 'Oi! ' + origem + ' e quero saber da pós' + (area ? ' em ' + area : '') + ' (' + codigo + ')';
+  }
+
+  function destino(numero, codigoPadrao, search) {
+    var c = '';
+    try { c = codigoValido(new URLSearchParams(search).get('c')); } catch (e) { /* navegador antigo: fica o padrão */ }
+    var codigo = c || codigoPadrao;
+    return { codigo: codigo, url: 'https://wa.me/' + numero + '?text=' + encodeURIComponent(mensagem(codigo)) };
+  }
+
+  return { codigoValido: codigoValido, mensagem: mensagem, destino: destino };
+})();
+/* Botões de WhatsApp das páginas da pós ([data-whats]): mensagem com o código de origem e a área,
+   origem guardada por 30 dias e selo de campanha que some depois do fim ([data-fim]).
+   O gerador embute este arquivo logo depois de link-curto.js. Sem JS, os botões já têm o link "SITE". */
+(function () {
+  var NUMERO = '5519992467847';
+  var REGISTRO = '';
+  var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
+  var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube' };
+  var agora = Date.now();
+
+  function ler(chave) {
     try {
-      var salvo = JSON.parse(localStorage.getItem('cp_ultimo_codigo') || 'null');
-      var trintaDias = 30 * 24 * 60 * 60 * 1000;
-      if (!salvo || !salvo.c || !/^[A-Z]{2}[A-Z0-9]{2,8}$/.test(salvo.c) || Date.now() - salvo.em > trintaDias) return;
-      var msg = 'Oi! Vim pelo site e quero saber da pós (' + salvo.c + ')';
-      document.getElementById('whatsapp').href = 'https://wa.me/5519992467847?text=' + encodeURIComponent(msg);
-    } catch (e) {}
-  })();
+      var v = JSON.parse(localStorage.getItem(chave) || 'null');
+      return v && agora - v.em < TRINTA_DIAS ? v : null;
+    } catch (e) { return null; }
+  }
+  function gravar(chave, valor) {
+    try { localStorage.setItem(chave, JSON.stringify(valor)); } catch (e) { /* modo privado: segue sem guardar */ }
+  }
+
+  var params = null;
+  try { params = new URLSearchParams(location.search); } catch (e) {}
+  function parametro(nome) { return params ? String(params.get(nome) || '').slice(0, 100) : ''; }
+
+  // Código da URL > último guardado (de um link curto ou visita anterior) > SITE.
+  var daUrl = LINK_CURTO.codigoValido(parametro('c'));
+  var ultimo = ler('cp_ultimo_codigo');
+  var codigo = daUrl || (ultimo && LINK_CURTO.codigoValido(ultimo.c)) || 'SITE';
+  if (daUrl) gravar('cp_ultimo_codigo', { c: daUrl, em: agora });
+
+  // Primeiro toque: de onde a pessoa veio da primeira vez, mesmo que troque de página depois.
+  var primeiro = ler('cp_primeiro');
+  if (!primeiro) {
+    primeiro = {
+      c: codigo,
+      utm_source: parametro('utm_source') || REDE_DA_SIGLA[codigo.slice(0, 2)] || '',
+      utm_medium: parametro('utm_medium'),
+      utm_campaign: parametro('utm_campaign'),
+      utm_content: parametro('utm_content'),
+      gclid: parametro('gclid'),
+      fbclid: parametro('fbclid'),
+      entrada: location.pathname,
+      em: agora
+    };
+    gravar('cp_primeiro', primeiro);
+  }
+
+  function registrar(botao, area) {
+    var posicao = botao.getAttribute('data-posicao') || '';
+    if (REGISTRO && navigator.sendBeacon) {
+      // Não segura a ida para o WhatsApp: se falhar, a pessoa chega lá do mesmo jeito.
+      var dados = JSON.stringify({ tipo: 'clique', rede: 'site', codigo: codigo, primeiro: primeiro.c, area: area, posicao: posicao, pagina: location.pathname, quando: new Date().toISOString() });
+      try { navigator.sendBeacon(REGISTRO, new Blob([dados], { type: 'text/plain;charset=utf-8' })); } catch (e) {}
+    }
+    if (typeof window.gtag === 'function') {
+      try { window.gtag('event', 'whatsapp_clique', { codigo: codigo, area: area, posicao: posicao }); } catch (e) {}
+    }
+  }
+
+  var botoes = document.querySelectorAll('[data-whats]');
+  for (var i = 0; i < botoes.length; i++) {
+    (function (botao) {
+      var area = botao.getAttribute('data-area') || '';
+      botao.setAttribute('href', 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(LINK_CURTO.mensagem(codigo, area)));
+      botao.addEventListener('click', function () { registrar(botao, area); });
+    })(botoes[i]);
+  }
+
+  // Oferta vencida não fica no ar, nem com a página em cache.
+  var selos = document.querySelectorAll('[data-fim]');
+  for (var j = 0; j < selos.length; j++) {
+    var fimTexto = selos[j].getAttribute('data-fim');
+    if (!(agora <= Date.parse(fimTexto))) { selos[j].parentNode.removeChild(selos[j]); continue; }
+    var faltam = selos[j].querySelector('[data-faltam]');
+    if (faltam) faltam.textContent = textoFaltam(fimTexto);
+  }
+
+  // Prazo real, em dias de calendário no horário de Brasília (UTC-3, sem horário de verão).
+  function textoFaltam(fimTexto) {
+    var hoje = new Date(agora - 3 * 60 * 60 * 1000);
+    var p = fimTexto.slice(0, 10).split('-');
+    var dias = Math.round((Date.UTC(+p[0], p[1] - 1, +p[2]) - Date.UTC(hoje.getUTCFullYear(), hoje.getUTCMonth(), hoje.getUTCDate())) / (24 * 60 * 60 * 1000));
+    var data = p[2] + '/' + p[1];
+    if (dias <= 0) return 'termina hoje às 23h59';
+    if (dias === 1) return 'termina amanhã, ' + data;
+    return 'faltam ' + dias + ' dias, até ' + data;
+  }
+
+  // Barra fixa do celular: entra quando o botão do topo sai da tela, para não repetir o mesmo convite.
+  // Sem IntersectionObserver, a barra fica sempre visível.
+  var barra = document.querySelector('.barra-whats');
+  var principal = document.querySelector('.heroi .botao');
+  if (barra && principal && 'IntersectionObserver' in window) {
+    barra.classList.add('barra-whats--fora');
+    new IntersectionObserver(function (registros) {
+      barra.classList.toggle('barra-whats--fora', registros[0].isIntersecting);
+    }).observe(principal);
+  }
+
+  // ?area=saude (vídeo de área): leva direto ao cartão da área.
+  var slug = parametro('area').replace(/[^a-z]/g, '');
+  var alvo = slug && document.getElementById('area-' + slug);
+  if (alvo) {
+    alvo.classList.add('area--destaque');
+    try { alvo.scrollIntoView({ block: 'center' }); } catch (e) {}
+  }
+})();
 </script>
 </body>
 </html>

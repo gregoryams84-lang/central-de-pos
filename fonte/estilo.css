@@ -1,0 +1,170 @@
+/* Central de Pós: celular primeiro. Fonte própria (sem Google Fonts: mais rápido e sem terceiro).
+   Laranja #F94D12 é o único acento; --laranja-texto é o mesmo tom escurecido para texto pequeno
+   passar no contraste mínimo (4,5:1) sobre o fundo claro. */
+@font-face { font-family: 'Montserrat'; font-weight: 400; font-display: swap; src: url('/fontes/montserrat-400.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 600; font-display: swap; src: url('/fontes/montserrat-600.woff2') format('woff2'); }
+@font-face { font-family: 'Montserrat'; font-weight: 700; font-display: swap; src: url('/fontes/montserrat-700.woff2') format('woff2'); }
+
+:root {
+  --laranja: #F94D12;
+  --laranja-forte: #D63E0B;
+  --laranja-texto: #C2390A;
+  --laranja-fundo: #FFF1EA;
+  --texto: #1D1D1D;
+  --texto-suave: #555555;
+  --fundo: #FCFCFC;
+  --cartao: #FFFFFF;
+  --linha: #E6E6E6;
+  --raio: 14px;
+  --largura: 1080px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--laranja-texto); }
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+p { margin: 0; }
+.dentro { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 20px; }
+.secao { padding: 48px 0; }
+.secao__titulo { font-size: clamp(1.5rem, 5.5vw, 2.1rem); font-weight: 700; margin-bottom: 10px; }
+.secao__sub { color: var(--texto-suave); margin-bottom: 24px; max-width: 640px; }
+
+/* Cabeçalho fixo no topo */
+.topo { position: sticky; top: 0; z-index: 20; background: rgba(252, 252, 252, 0.96); border-bottom: 1px solid var(--linha); }
+.topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 56px; padding: 8px 20px; }
+.marca { color: var(--texto); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.01em; text-decoration: none; }
+.marca span { color: var(--laranja); }
+.topo__whats { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: 999px; background: var(--laranja); color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; }
+.topo__whats svg { width: 18px; height: 18px; flex: none; }
+/* No celular a barra de baixo faz esse papel. */
+.com-barra .topo__whats { display: none; }
+
+/* Botão principal */
+.botao {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; max-width: 420px; min-height: 60px; padding: 14px 22px;
+  border-radius: var(--raio); background: var(--laranja); color: #fff;
+  font-weight: 700; font-size: 1.2rem; line-height: 1.25; text-align: center; text-decoration: none;
+  box-shadow: 0 6px 18px rgba(249, 77, 18, 0.28);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.botao svg { width: 24px; height: 24px; flex: none; }
+.botao:hover { background: var(--laranja-forte); }
+.botao:active { transform: scale(0.98); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--texto); outline-offset: 3px; }
+
+/* Topo da página */
+.heroi { padding: 28px 0 36px; }
+.rotulo { font-size: 0.78rem; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 12px; }
+.heroi h1 { font-size: clamp(1.85rem, 8.2vw, 3.1rem); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; max-width: 760px; }
+.heroi h1 em { font-style: normal; color: var(--laranja); }
+.heroi__sub { font-size: 1.06rem; color: var(--texto-suave); margin-bottom: 22px; max-width: 620px; }
+.heroi__nota { font-size: 0.88rem; color: var(--texto-suave); margin-top: 12px; }
+
+/* Selo da campanha (some sozinho depois do fim) */
+.selo { margin-top: 22px; max-width: 520px; padding: 14px 16px; border: 1.5px solid var(--laranja); border-radius: var(--raio); background: var(--laranja-fundo); }
+.selo__nome { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--laranja-texto); margin-bottom: 4px; }
+.selo__oferta { font-weight: 700; font-size: 1.02rem; }
+.selo__notas { margin-top: 8px; font-size: 0.74rem; line-height: 1.5; color: var(--texto-suave); }
+.selo__notas p + p { margin-top: 4px; }
+
+/* Fatos */
+.fatos { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.fatos li { padding: 6px 12px; border: 1px solid var(--linha); border-radius: 999px; background: var(--cartao); font-size: 0.85rem; font-weight: 600; }
+
+/* Áreas */
+.areas { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.area {
+  display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 16px;
+  border: 1px solid var(--linha); border-radius: var(--raio); background: var(--cartao);
+  color: var(--texto); text-decoration: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.area:hover { border-color: var(--laranja); box-shadow: 0 4px 16px rgba(29, 29, 29, 0.06); }
+.area__topo { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.area__nome { font-weight: 700; font-size: 1.08rem; line-height: 1.3; }
+.area__qtd { flex: none; font-size: 0.82rem; font-weight: 700; color: var(--laranja-texto); }
+.area__ex { font-size: 0.88rem; color: var(--texto-suave); line-height: 1.5; }
+.area__cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-weight: 700; font-size: 0.95rem; color: var(--laranja-texto); }
+.area__cta svg { width: 18px; height: 18px; }
+.areas__nota { margin-top: 18px; color: var(--texto-suave); font-size: 0.95rem; }
+.areas__nota a { font-weight: 700; }
+
+/* Confiança */
+.confianca { background: var(--cartao); border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); }
+.provas { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 0; padding: 0; list-style: none; }
+.prova { display: flex; gap: 14px; }
+.prova__icone { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--laranja-fundo); color: var(--laranja-texto); display: flex; align-items: center; justify-content: center; }
+.prova__icone svg { width: 20px; height: 20px; }
+.prova h3 { font-size: 1.02rem; margin-bottom: 4px; }
+.prova p { font-size: 0.93rem; color: var(--texto-suave); }
+
+/* Perguntas */
+.perguntas { max-width: 760px; }
+.pergunta { border-bottom: 1px solid var(--linha); }
+.pergunta summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 14px 0; font-weight: 700; font-size: 1.02rem; cursor: pointer; list-style: none; }
+.pergunta summary::-webkit-details-marker { display: none; }
+.pergunta summary::after { content: '+'; flex: none; font-size: 1.5rem; font-weight: 400; color: var(--laranja-texto); line-height: 1; }
+.pergunta[open] summary::after { content: '–'; }
+.pergunta p { padding: 0 0 18px; color: var(--texto-suave); font-size: 0.96rem; }
+
+/* Chamada final */
+.final { background: var(--texto); color: #fff; text-align: center; }
+.final .secao__titulo { color: #fff; }
+.final .secao__sub { color: #D6D6D6; margin-left: auto; margin-right: auto; }
+.final .botao { margin: 0 auto; }
+
+/* Rodapé */
+.rodape { padding: 28px 20px; text-align: center; font-size: 0.8rem; color: var(--texto-suave); border-top: 1px solid var(--linha); }
+.rodape p + p { margin-top: 6px; }
+.rodape__marca { font-weight: 700; color: var(--texto); }
+
+/* Barra fixa do WhatsApp no celular */
+.barra-whats {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 60px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--laranja); color: #fff; font-weight: 700; font-size: 1.12rem; text-decoration: none;
+  box-shadow: 0 -4px 16px rgba(29, 29, 29, 0.12);
+  transition: transform 0.2s ease;
+}
+.barra-whats svg { width: 24px; height: 24px; flex: none; }
+.barra-whats--fora { transform: translateY(110%); }
+.area--destaque { border-color: var(--laranja); box-shadow: 0 0 0 3px var(--laranja-fundo); }
+.com-barra { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+
+/* Páginas de texto (privacidade, termos) */
+.texto { max-width: 760px; padding-top: 32px; padding-bottom: 48px; }
+.texto h1 { font-size: clamp(1.6rem, 6vw, 2.2rem); margin-bottom: 8px; }
+.texto h2 { font-size: 1.15rem; margin: 28px 0 8px; }
+.texto p, .texto li { color: #333; }
+.texto p + p { margin-top: 10px; }
+.texto ul { padding-left: 20px; margin: 8px 0 0; }
+.texto .atualizado { color: var(--texto-suave); font-size: 0.88rem; }
+
+@media (min-width: 640px) {
+  .areas { grid-template-columns: repeat(2, 1fr); }
+  .provas { grid-template-columns: repeat(2, 1fr); gap: 24px 32px; }
+  .secao { padding: 64px 0; }
+  .heroi { padding: 56px 0 56px; }
+}
+@media (min-width: 960px) {
+  .areas { grid-template-columns: repeat(3, 1fr); }
+  .provas { grid-template-columns: repeat(4, 1fr); }
+  .com-barra .topo__whats { display: inline-flex; }
+  .barra-whats { display: none; }
+  .com-barra { padding-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
