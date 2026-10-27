@@ -36,7 +36,9 @@ function carregar({ abas = [aba('cliques')] } = {}) {
   class DataFixa extends Date { static now() { return fixo; } } // o freio conta por minuto: o teste não pode virar o minuto
   const gatilhos = [];
   const planilha = {
-    abas,
+    abas, fuso: 'America/Los_Angeles',
+    getSpreadsheetTimeZone() { return this.fuso; },
+    setSpreadsheetTimeZone(f) { this.fuso = f; },
     getSheetByName: (n) => abas.find((a) => a.nome === n) || null,
     insertSheet: (n) => { const a = aba(n); abas.push(a); return a; },
     getSheets: () => abas,
@@ -69,6 +71,7 @@ test('o clique de um botão do site vira uma linha no fim da aba, com a hora do 
   const [quando, ...resto] = app.cliques()[0];
   assert.ok(Math.abs(quando.getTime() - Date.now()) < 5000, 'usa a hora do servidor, não a do celular');
   assert.deepEqual(resto, ['site', 'KW07', 'IG00', 'Direito', 'area', '/?c=KW07&area=direito']);
+  assert.equal(app.planilha.fuso, 'America/Sao_Paulo', 'a planilha nova vem no fuso do Pacífico');
 });
 
 test('o clique que a página de link curto manda de verdade é aceito', async () => {

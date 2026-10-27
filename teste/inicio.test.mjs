@@ -147,7 +147,7 @@ test('com o registro ligado, o clique vai para a planilha sem dado pessoal', asy
 });
 
 test('com o registro desligado, o clique não manda nada', () => {
-  const r = abrir(html);
+  const r = abrir(montarInicio({ ...config, registroCliques: '' }, conteudo, new Date(ANTES_DO_FIM)));
   r.botoes[0].ouvintes.click();
   assert.equal(r.beacons.length, 0);
 });

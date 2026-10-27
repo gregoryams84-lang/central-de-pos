@@ -44,7 +44,7 @@ var LINK_CURTO = (function () {
 })();
 (function () {
   var d = LINK_CURTO.destino('5519992467847', 'FB00', location.search);
-  var registro = '';
+  var registro = 'https://script.google.com/macros/s/AKfycbxlmgBkimS9jM-YADeLRDGQW3NHT-YFVyA44D0PSASIK7uaaGnbGcVMj6Pq-QKvjibmcw/exec';
   if (registro && navigator.sendBeacon) {
     // O clique vai para a planilha sem segurar o redirecionamento: se falhar, a pessoa chega no WhatsApp igual.
     var dados = JSON.stringify({ tipo: 'clique', rede: 'facebook', codigo: d.codigo, pagina: location.pathname + location.search, quando: new Date().toISOString() });

@@ -18,6 +18,7 @@ var POSICAO = /^[a-z-]{1,20}$/;
 var TAMANHO_MAXIMO = 2000;
 var LIMITE_POR_MINUTO = 300;
 var MESES_DE_GUARDA = 12;
+var FUSO = 'America/Sao_Paulo';
 
 function doPost(e) {
   var linha = montarLinha(e && e.postData ? e.postData.contents : '', new Date());
@@ -62,6 +63,8 @@ function dentroDoLimite() {
 
 function abaCliques() {
   var planilha = SpreadsheetApp.getActiveSpreadsheet();
+  // A planilha criada pela API nasce no fuso do Pacífico: a hora tem que aparecer na de Brasília.
+  if (planilha.getSpreadsheetTimeZone() !== FUSO) planilha.setSpreadsheetTimeZone(FUSO);
   var aba = planilha.getSheetByName(ABA);
   if (!aba) {
     aba = planilha.insertSheet(ABA);
