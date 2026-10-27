@@ -86,9 +86,9 @@ function prepararPlanilha() {
   }
   abaCliques();
   var resumo = planilha.getSheetByName('resumo') || planilha.insertSheet('resumo');
-  resumo.getRange('A1').setFormula(contagem('C', 'Código'));
-  resumo.getRange('D1').setFormula(contagem('B', 'Rede'));
-  resumo.getRange('G1').setFormula(contagem('E', 'Área'));
+  escreverContagem(resumo.getRange('A1'), 'C', 'Código');
+  escreverContagem(resumo.getRange('D1'), 'B', 'Rede');
+  escreverContagem(resumo.getRange('G1'), 'E', 'Área');
   var gatilhos = ScriptApp.getProjectTriggers();
   for (var i = 0; i < gatilhos.length; i++) {
     if (gatilhos[i].getHandlerFunction() === 'limparAntigos') ScriptApp.deleteTrigger(gatilhos[i]);
@@ -96,9 +96,17 @@ function prepararPlanilha() {
   ScriptApp.newTrigger('limparAntigos').timeBased().onMonthDay(1).atHour(4).create();
 }
 
-function contagem(coluna, rotulo) {
-  return '=QUERY(cliques!A:G,"select ' + coluna + ', count(A) where ' + coluna + ' is not null group by ' + coluna +
-    ' order by count(A) desc label ' + coluna + " '" + rotulo + "', count(A) 'Cliques'\",1)";
+// A planilha em português do Brasil pode recusar a vírgula entre os argumentos (aparece #ERROR!):
+// tenta com vírgula e, se não der, com ponto e vírgula.
+function escreverContagem(celula, coluna, rotulo) {
+  celula.setFormula(contagem(coluna, rotulo, ','));
+  SpreadsheetApp.flush();
+  if (/^#ERR/.test(celula.getDisplayValue())) celula.setFormula(contagem(coluna, rotulo, ';'));
+}
+
+function contagem(coluna, rotulo, separador) {
+  return '=QUERY(cliques!A:G' + separador + '"select ' + coluna + ', count(A) where ' + coluna + ' is not null group by ' + coluna +
+    ' order by count(A) desc label ' + coluna + " '" + rotulo + "', count(A) 'Cliques'\"" + separador + '1)';
 }
 
 // Gatilho mensal: apaga os cliques com mais de 12 meses. As linhas entram em ordem de data, então

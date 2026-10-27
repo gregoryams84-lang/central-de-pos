@@ -21,6 +21,8 @@ function aba(nome) {
       const a = this;
       return {
         setFormula(f) { a.formulas = { ...a.formulas, [linha]: f }; },
+        // Planilha que só aceita ";" entre os argumentos mostra #ERROR! com a vírgula.
+        getDisplayValue: () => (a.soPontoEVirgula && /^=QUERY\(cliques!A:G,/.test(a.formulas[linha]) ? '#ERROR!' : 'Código'),
         getValues: () => a.linhas.slice(linha - 1, linha - 1 + quantas).map((l) => [l[coluna - 1]]),
       };
     },
@@ -47,7 +49,7 @@ function carregar({ abas = [aba('cliques')] } = {}) {
     JSON, Date: DataFixa, Math, Number, String,
     ContentService: { createTextOutput: (t) => ({ texto: t }) },
     CacheService: { getScriptCache: () => ({ get: (k) => guardado[k] ?? null, put: (k, v) => { guardado[k] = v; } }) },
-    SpreadsheetApp: { getActiveSpreadsheet: () => planilha },
+    SpreadsheetApp: { getActiveSpreadsheet: () => planilha, flush() {} },
     ScriptApp: {
       getProjectTriggers: () => gatilhos,
       deleteTrigger: (t) => gatilhos.splice(gatilhos.indexOf(t), 1),
@@ -139,6 +141,15 @@ test('prepararPlanilha usa a aba vazia da planilha nova, monta o resumo e um gat
   assert.match(app.planilha.getSheetByName('resumo').formulas.A1, /^=QUERY\(cliques!A:G,"select C, count\(A\) where C is not null group by C order by count\(A\) desc label C 'Código', count\(A\) 'Cliques'",1\)$/);
   assert.equal(app.gatilhos.length, 1);
   assert.deepEqual([app.gatilhos[0].funcao, app.gatilhos[0].dia], ['limparAntigos', 1]);
+});
+
+test('se a planilha recusar a vírgula na fórmula do resumo, ela é reescrita com ponto e vírgula', () => {
+  const resumo = aba('resumo');
+  resumo.soPontoEVirgula = true;
+  const app = carregar({ abas: [aba('cliques'), resumo] });
+  app.ctx.prepararPlanilha();
+  assert.match(resumo.formulas.A1, /^=QUERY\(cliques!A:G;"select C, count\(A\) .*'Cliques'";1\)$/);
+  assert.match(resumo.formulas.D1, /^=QUERY\(cliques!A:G;"select B,/);
 });
 
 test('a limpeza mensal apaga só os cliques com mais de 12 meses', () => {
