@@ -18,7 +18,8 @@ const atributos = (tag) => Object.fromEntries([...tag.matchAll(/([\w-]+)(?:="([^
 
 // Monta os elementos que o script usa a partir do HTML gerado.
 function abrir(html, { search = '', agora = ANTES_DO_FIM, guardado = {}, storage = 'ok', gtag } = {}) {
-  const script = html.match(/<script>([\s\S]*?)<\/script>/)[1];
+  // O do fim do body: com a tag do Google ligada, o primeiro <script> é o do consentimento, na head.
+  const script = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1)[1];
   const elemento = (tag) => {
     const el = {
       attrs: atributos(tag), ouvintes: {}, removido: false,

@@ -50,13 +50,24 @@ function abrir(html, { guardado = {} } = {}) {
   return r;
 }
 
-test('desligada (como está hoje): nenhuma página tem tag, aviso ou conversão, e a privacidade diz que não há cookie', () => {
+test('as páginas no disco seguem a config: a tag fica nas páginas com botão, nunca nos links curtos', () => {
+  const g = config.googleAds && config.googleAds.id ? config.googleAds : null;
   for (const p of paginasNoDisco) {
     const html = readFileSync(new URL(p, raiz), 'utf8');
-    assert.doesNotMatch(html, /googletagmanager|gtag\('config'|<div class="cookies"/, p);
-    if (/var CONVERSAO/.test(html)) assert.match(html, /var CONVERSAO = '';/, p);
+    const curto = !['index.html', 'privacidade/index.html', 'termos/index.html'].includes(p);
+    if (!g || curto) {
+      // O link curto redireciona na hora: tag ali só atrasaria a ida para o WhatsApp.
+      assert.doesNotMatch(html, /googletagmanager|gtag\('config'|<div class="cookies"/, p);
+      if (/var CONVERSAO/.test(html)) assert.match(html, /var CONVERSAO = '';/, p);
+    } else {
+      assert.ok(html.indexOf("gtag('consent', 'default'") < html.indexOf(`googletagmanager.com/gtag/js?id=${g.id}`), p);
+      assert.match(html, new RegExp(`var CONVERSAO = '${g.id}/${g.rotulo}';`), p);
+      assert.match(html, /<div class="cookies" data-cookies hidden>/, p);
+    }
   }
-  assert.match(readFileSync(new URL('privacidade/index.html', raiz), 'utf8'), /Sem cookies de publicidade/);
+  const privacidade = readFileSync(new URL('privacidade/index.html', raiz), 'utf8');
+  assert.match(privacidade, g ? /<li id="cookies"><strong>Tag do Google Ads/ : /Sem cookies de publicidade/);
+  assert.doesNotMatch(privacidade, /Atualizada em 26\/10\/2026/, 'mudou o texto dos cookies: muda a data');
 });
 
 test('ligada: o consentimento negado vem antes da tag, e quem já aceitou volta com a medição liberada', () => {

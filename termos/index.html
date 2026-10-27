@@ -292,7 +292,15 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 }
 </style>
 
-
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+try { if (localStorage.getItem('cp_cookies') === 'sim') gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' }); } catch (e) {}
+gtag('js', new Date());
+gtag('config', 'AW-18540770966');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18540770966"></script>
 </head>
 <body class="">
 <header class="topo">
@@ -337,7 +345,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
   </div>
 </footer>
 
-
+<div class="cookies" data-cookies hidden>
+  <p>Usamos um cookie do Google só para saber quais anúncios trazem conversas. <a href="/privacidade/#cookies">Saiba mais</a></p>
+  <div class="cookies__botoes"><button type="button" class="cookies__botao" data-cookies-resposta="nao">Recusar</button><button type="button" class="cookies__botao cookies__botao--sim" data-cookies-resposta="sim">Aceitar</button></div>
+</div>
 <script>
 /* Monta o link do WhatsApp do Manoel a partir do código da página e do ?c= da URL.
    O gerador embute este arquivo em cada página de link curto, para o redirecionamento
@@ -380,7 +391,7 @@ var LINK_CURTO = (function () {
 (function () {
   var NUMERO = '5519992467847';
   var REGISTRO = '';
-  var CONVERSAO = ''; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
+  var CONVERSAO = 'AW-18540770966/ypzKCIfQ3KsdEJbt9ohF'; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
   var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
   var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube', AM: 'meta', AG: 'google' };
   var agora = Date.now();

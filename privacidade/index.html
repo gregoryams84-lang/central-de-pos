@@ -292,7 +292,15 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 }
 </style>
 
-
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+try { if (localStorage.getItem('cp_cookies') === 'sim') gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' }); } catch (e) {}
+gtag('js', new Date());
+gtag('config', 'AW-18540770966');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18540770966"></script>
 </head>
 <body class="">
 <header class="topo">
@@ -306,7 +314,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 </header>
 <main class="dentro texto">
   <h1>Política de privacidade</h1>
-  <p class="atualizado">Atualizada em 26/10/2026</p>
+  <p class="atualizado">Atualizada em 27/10/2026</p>
 
   <h2>Quem cuida dos seus dados</h2>
   <p>A Central de Pós · Polo Anhanguera é o atendimento de pós-graduação da AUREA EDUCACIONAL LTDA, CNPJ 67.140.776/0001-88, polo parceiro da Anhanguera. Ela é a controladora dos dados tratados neste site e no atendimento pelo WhatsApp.</p>
@@ -316,7 +324,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
   <ul>
     <li><strong>No seu aparelho:</strong> o navegador guarda por até 30 dias o código do link pelo qual você chegou (por exemplo, IG00) e as marcações de campanha do endereço, se houver. Isso serve só para a mensagem do WhatsApp já sair com a sua origem.</li>
     <li><strong>Contagem de cliques:</strong> quando você toca num botão do WhatsApp, podemos registrar a rede, o código, a área, a página e a hora. Esse registro não tem nome, telefone nem endereço IP.</li>
-    <li><strong>Sem cookies de publicidade:</strong> hoje o site não usa cookies nem pixels de anúncio. Se passar a usar, esta página será atualizada e o site pedirá o seu consentimento antes.</li>
+    <li id="cookies"><strong>Tag do Google Ads:</strong> o site usa a tag do Google Ads para contar quantas pessoas chegaram por um anúncio e tocaram no botão do WhatsApp. Enquanto você não toca em "Aceitar" no aviso, a tag não grava cookie no seu aparelho: o Google recebe só sinais sem cookie, como a hora da visita, o navegador e se ela veio de um anúncio. Se você aceitar, o Google grava um cookie de medição que dura até 90 dias. Não usamos esse cookie para mostrar anúncios personalizados, e o site não tem o Pixel da Meta. Para mudar a escolha, apague os dados deste site no navegador. O Google trata esses dados conforme a <a href="https://policies.google.com/privacy" rel="noopener">política de privacidade dele</a>.</li>
   </ul>
   <p>O site é hospedado no GitHub Pages, que pode registrar dados técnicos de acesso, como o endereço IP, para segurança, conforme a política do próprio GitHub.</p>
 
@@ -337,7 +345,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
   </div>
 </footer>
 
-
+<div class="cookies" data-cookies hidden>
+  <p>Usamos um cookie do Google só para saber quais anúncios trazem conversas. <a href="/privacidade/#cookies">Saiba mais</a></p>
+  <div class="cookies__botoes"><button type="button" class="cookies__botao" data-cookies-resposta="nao">Recusar</button><button type="button" class="cookies__botao cookies__botao--sim" data-cookies-resposta="sim">Aceitar</button></div>
+</div>
 <script>
 /* Monta o link do WhatsApp do Manoel a partir do código da página e do ?c= da URL.
    O gerador embute este arquivo em cada página de link curto, para o redirecionamento
@@ -380,7 +391,7 @@ var LINK_CURTO = (function () {
 (function () {
   var NUMERO = '5519992467847';
   var REGISTRO = '';
-  var CONVERSAO = ''; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
+  var CONVERSAO = 'AW-18540770966/ypzKCIfQ3KsdEJbt9ohF'; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
   var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
   var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube', AM: 'meta', AG: 'google' };
   var agora = Date.now();
