@@ -6,16 +6,19 @@ var LINK_CURTO = (function () {
   // Vídeo: rede + número com 2 dígitos (00 = bio). Palavra-chave: resposta automática do direct/Messenger.
   var CODIGO_VIDEO = /^(IG|FB|TT|KW|YT)(\d{2})$/;
   var CODIGO_PALAVRA = /^(IG|FB)(POS|MBA|CONCURSO|CARREIRA)$/;
+  // Anúncio pago: AM = Meta (Facebook e Instagram), AG = Google, + número com 2 dígitos.
+  var CODIGO_ANUNCIO = /^A[MG]\d{2}$/;
 
   function codigoValido(c) {
     c = String(c || '').trim().toUpperCase();
-    return CODIGO_VIDEO.test(c) || CODIGO_PALAVRA.test(c) ? c : '';
+    return CODIGO_VIDEO.test(c) || CODIGO_PALAVRA.test(c) || CODIGO_ANUNCIO.test(c) ? c : '';
   }
 
   // codigo 'SITE' = chegou sem código de rede. area: nome de exibição, nos botões das áreas.
   function mensagem(codigo, area) {
     var video = CODIGO_VIDEO.exec(codigo);
     var origem = codigo === 'SITE' ? 'Vim pelo site'
+      : CODIGO_ANUNCIO.test(codigo) ? 'Vi o anúncio'
       : video && video[2] !== '00' ? 'Vi o vídeo no ' + REDES[video[1]]
       : 'Vim pelo ' + REDES[codigo.slice(0, 2)];
     return 'Oi! ' + origem + ' e quero saber da pós' + (area ? ' em ' + area : '') + ' (' + codigo + ')';

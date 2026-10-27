@@ -101,6 +101,16 @@ test('?c= de vídeo vai para a mensagem e fica guardado com a origem deduzida', 
   assert.equal(primeiro.utm_campaign, 'pos');
 });
 
+test('?c= de anúncio pago chega no botão da área e a origem fica como meta ou google', () => {
+  const meta = abrir(html, { search: '?c=AM01' });
+  const educacao = meta.botoes.find((b) => areaDe(b) === 'Educação');
+  assert.equal(texto(educacao.getAttribute('href')), 'Oi! Vi o anúncio e quero saber da pós em Educação (AM01)');
+  assert.equal(JSON.parse(meta.dados.cp_primeiro).utm_source, 'meta');
+  const google = abrir(html, { search: '?c=AG03&gclid=xyz' });
+  const primeiro = JSON.parse(google.dados.cp_primeiro);
+  assert.deepEqual([primeiro.c, primeiro.utm_source, primeiro.gclid], ['AG03', 'google', 'xyz']);
+});
+
 test('quem passou por um link curto mantém o código; depois de 30 dias, não', () => {
   const recente = { cp_ultimo_codigo: JSON.stringify({ c: 'IG00', em: ANTES_DO_FIM - DIA }) };
   assert.match(texto(abrir(html, { guardado: recente }).botoes[0].getAttribute('href')), /\(IG00\)$/);

@@ -44,8 +44,13 @@ test('a rede da mensagem vem do código, não da página', () => {
   assert.equal(texto(d), 'Oi! Vi o vídeo no Instagram e quero saber da pós (IG03)');
 });
 
+test('código de anúncio pago (AM = Meta, AG = Google) diz "Vi o anúncio", sem prometer a oferta do momento', () => {
+  assert.equal(texto(destino(NUMERO, 'IG00', '?c=AM01')), 'Oi! Vi o anúncio e quero saber da pós (AM01)');
+  assert.equal(texto(destino(NUMERO, 'IG00', '?c=ag12')), 'Oi! Vi o anúncio e quero saber da pós (AG12)');
+});
+
 test('código inválido é ignorado e cai no padrão', () => {
-  for (const c of ['XX99', 'KW7', 'KW123', 'TTPOS', 'IG', '', '<script>', 'IGPOSX']) {
+  for (const c of ['XX99', 'KW7', 'KW123', 'TTPOS', 'IG', '', '<script>', 'IGPOSX', 'AX01', 'AM1', 'AM001', 'AMPOS']) {
     assert.equal(destino(NUMERO, 'FB00', '?c=' + encodeURIComponent(c)).codigo, 'FB00', c);
   }
   assert.equal(codigoValido(undefined), '');

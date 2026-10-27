@@ -5,7 +5,7 @@
   var NUMERO = '{{WHATSAPP}}';
   var REGISTRO = '{{REGISTRO}}';
   var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
-  var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube' };
+  var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube', AM: 'meta', AG: 'google' };
   var agora = Date.now();
 
   function ler(chave) {
