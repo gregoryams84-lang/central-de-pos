@@ -4,6 +4,7 @@
 (function () {
   var NUMERO = '{{WHATSAPP}}';
   var REGISTRO = '{{REGISTRO}}';
+  var CONVERSAO = '{{CONVERSAO}}'; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
   var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
   var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube', AM: 'meta', AG: 'google' };
   var agora = Date.now();
@@ -54,6 +55,9 @@
     }
     if (typeof window.gtag === 'function') {
       try { window.gtag('event', 'whatsapp_clique', { codigo: codigo, area: area, posicao: posicao }); } catch (e) {}
+      if (CONVERSAO) {
+        try { window.gtag('event', 'conversion', { send_to: CONVERSAO }); } catch (e) {}
+      }
     }
   }
 
@@ -122,6 +126,29 @@
       barra.classList.toggle('barra-whats--fora', !!(visiveis.topo || visiveis.final));
     });
     for (var m = 0; m < principais.length; m++) observador.observe(principais[m]);
+  }
+
+  // Aviso do cookie do Google Ads: só existe na página quando a tag está ligada, e some depois da resposta.
+  // Enquanto ele está na tela, a barra do WhatsApp sobe para ficar acima dele.
+  var aviso = document.querySelector('[data-cookies]');
+  var respondeu = null;
+  try { respondeu = localStorage.getItem('cp_cookies'); } catch (e) {}
+  if (aviso && respondeu !== 'sim' && respondeu !== 'nao') {
+    aviso.hidden = false;
+    document.body.classList.add('com-cookies');
+    document.body.style.setProperty('--altura-cookies', aviso.offsetHeight + 'px');
+    var respostas = aviso.querySelectorAll('[data-cookies-resposta]');
+    for (var r = 0; r < respostas.length; r++) {
+      respostas[r].addEventListener('click', function () {
+        var resposta = this.getAttribute('data-cookies-resposta');
+        try { localStorage.setItem('cp_cookies', resposta); } catch (e) {}
+        if (resposta === 'sim' && typeof window.gtag === 'function') {
+          try { window.gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' }); } catch (e) {}
+        }
+        aviso.hidden = true;
+        document.body.classList.remove('com-cookies');
+      });
+    }
   }
 
   // ?area=saude (vídeo de área): leva direto ao cartão da área.

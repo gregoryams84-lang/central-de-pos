@@ -11,10 +11,17 @@ const ler = (caminho) => readFileSync(new URL(caminho, raiz), 'utf8');
 const lerJson = (caminho) => JSON.parse(ler(caminho));
 
 export function lerConfig() {
-  const config = lerJson('fonte/config.json');
+  return validarConfig(lerJson('fonte/config.json'));
+}
+
+export function validarConfig(config) {
   if (!/^55\d{10,11}$/.test(config.whatsapp)) throw new Error('fonte/config.json: whatsapp inválido');
   if (config.registroCliques && !config.registroCliques.startsWith('https://script.google.com/')) {
     throw new Error('fonte/config.json: registroCliques deve ser a URL do Web App do Apps Script');
+  }
+  const g = config.googleAds || {};
+  if (g.id && (!/^AW-\d{6,12}$/.test(g.id) || !/^[\w-]{4,40}$/.test(g.rotulo || ''))) {
+    throw new Error('fonte/config.json: googleAds precisa do id "AW-<número>" e do rótulo da conversão');
   }
   return config;
 }
@@ -148,6 +155,33 @@ const hora = (h) => `${String(h).padStart(2, '0')}:00`;
 
 const BARRA = (config) => `<a class="barra-whats" data-whats data-posicao="barra" href="${linkWhats(config, '')}" rel="noopener">${ICONES.ICONE}<span>Falar com um especialista</span></a>`;
 
+// Tag do Google Ads (googleAds em fonte/config.json). Sem id, o site fica sem tag, sem cookie e sem aviso.
+// Com id, o consentimento começa negado: até a pessoa tocar em "Aceitar", o Google não grava cookie de anúncio
+// e recebe só os sinais sem cookie do modo de consentimento. A política de privacidade promete isso.
+const googleAds = (config) => (config.googleAds && config.googleAds.id ? config.googleAds : null);
+
+function montarTagGoogle(config) {
+  const g = googleAds(config);
+  if (!g) return '';
+  return `<script>
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied' });
+try { if (localStorage.getItem('cp_cookies') === 'sim') gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' }); } catch (e) {}
+gtag('js', new Date());
+gtag('config', '${g.id}');
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=${g.id}"></script>`;
+}
+
+const AVISO_COOKIES = `<div class="cookies" data-cookies hidden>
+  <p>Usamos um cookie do Google só para saber quais anúncios trazem conversas. <a href="/privacidade/#cookies">Saiba mais</a></p>
+  <div class="cookies__botoes"><button type="button" class="cookies__botao" data-cookies-resposta="nao">Recusar</button><button type="button" class="cookies__botao cookies__botao--sim" data-cookies-resposta="sim">Aceitar</button></div>
+</div>`;
+
+const TEXTO_SEM_COOKIES = '<li><strong>Sem cookies de publicidade:</strong> hoje o site não usa cookies nem pixels de anúncio. Se passar a usar, esta página será atualizada e o site pedirá o seu consentimento antes.</li>';
+const TEXTO_COOKIE_GOOGLE = '<li id="cookies"><strong>Tag do Google Ads:</strong> o site usa a tag do Google Ads para contar quantas pessoas chegaram por um anúncio e tocaram no botão do WhatsApp. Enquanto você não toca em "Aceitar" no aviso, a tag não grava cookie no seu aparelho: o Google recebe só sinais sem cookie, como a hora da visita, o navegador e se ela veio de um anúncio. Se você aceitar, o Google grava um cookie de medição que dura até 90 dias. Não usamos esse cookie para mostrar anúncios personalizados, e o site não tem o Pixel da Meta. Para mudar a escolha, apague os dados deste site no navegador. O Google trata esses dados conforme a <a href="https://policies.google.com/privacy" rel="noopener">política de privacidade dele</a>.</li>';
+
 function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '', barra = '', jsonld = '' }) {
   const ogImagem = existsSync(new URL('og.png', raiz))
     ? `<meta property="og:image" content="${config.site}/og.png">\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta name="twitter:card" content="summary_large_image">`
@@ -161,7 +195,9 @@ function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '',
     INSTITUICAO: instituicao(config),
     RAZAO: config.empresa.razao,
     CNPJ: config.empresa.cnpj,
+    COOKIES_TEXTO: googleAds(config) ? TEXTO_COOKIE_GOOGLE : TEXTO_SEM_COOKIES,
   };
+  const g = googleAds(config);
   const pagina = preencher(ler('fonte/base.html'), {
     ...comuns,
     TITULO: escaparHtml(titulo),
@@ -171,13 +207,16 @@ function montarBase(config, { caminho, titulo, descricao, conteudo, classe = '',
     OG_IMAGEM: ogImagem,
     ESTILO: ler('fonte/estilo.css').trim(),
     JSONLD: jsonld,
+    TAG_GOOGLE: montarTagGoogle(config),
     CLASSE: classe,
     CONTEUDO: preencher(conteudo, comuns).trim(),
     BARRA: barra,
+    AVISO_COOKIES: g ? AVISO_COOKIES : '',
     LOGICA: logica,
     PAGINA: preencher(ler('fonte/pagina.js').trim(), {
       WHATSAPP: config.whatsapp,
       REGISTRO: config.registroCliques,
+      CONVERSAO: g ? `${g.id}/${g.rotulo}` : '',
       DIAS: JSON.stringify(config.atendimento.dias),
       ABRE: String(config.atendimento.abre),
       FECHA: String(config.atendimento.fecha),
@@ -222,7 +261,7 @@ export function montarSitemap(config) {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const config = lerConfig();
   const conteudo = lerConteudo();
   const gravar = (caminho, html) => {

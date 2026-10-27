@@ -12,6 +12,16 @@ const ler = (p) => readFileSync(new URL(p, raiz), 'utf8');
 // Texto que a pessoa vê: sem tags, sem script/style.
 const visivel = (html) => html.replace(/<(script|style)[\s\S]*?<\/\1>/gi, ' ').replace(/<[^>]+>/g, ' ');
 
+test('o topo e a imagem de compartilhamento dizem "Polo Anhanguera"; "polo parceiro" fica no rodapé e nos textos legais', () => {
+  const inicio = ler('index.html');
+  const topo = inicio.slice(inicio.indexOf('<header'), inicio.indexOf('</header>'));
+  assert.match(topo, /<strong>Central de Pós<\/strong><span>Polo Anhanguera<\/span>/);
+  assert.doesNotMatch(ler('fonte/og.html'), /parceiro/i);
+  const semRodape = inicio.slice(0, inicio.indexOf('<footer'));
+  assert.doesNotMatch(visivel(semRodape), /parceiro/i);
+  assert.match(inicio.slice(inicio.indexOf('<footer')), /Polo parceiro da Anhanguera/);
+});
+
 for (const pagina of paginas) {
   test(`${pagina}: sem link para a Anhanguera nacional`, () => {
     // Matrícula pelo site nacional conta como captação deles, não do polo.

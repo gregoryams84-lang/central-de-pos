@@ -45,7 +45,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .inteiro { white-space: nowrap; }
 a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
 
-/* Cabeçalho: logo oficial + "Central de Pós / Polo parceiro" */
+/* Cabeçalho: logo oficial + "Central de Pós / Polo Anhanguera" */
 .topo { position: sticky; top: 0; z-index: 20; background: var(--branco); border-bottom: 1px solid var(--linha); }
 .topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 64px; padding: 10px 20px; }
 .marca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; }
@@ -209,6 +209,24 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 .barra-whats svg { width: 24px; height: 24px; flex: none; }
 .barra-whats--fora { transform: translateY(140%); opacity: 0; }
 .com-barra { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+
+/* Aviso do cookie do Google Ads (só existe com a tag ligada) */
+.cookies {
+  position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 40;
+  display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 16px;
+  background: var(--azul-escuro); color: var(--branco); font-size: 0.9rem; line-height: 1.45;
+  box-shadow: 0 14px 30px -10px rgba(15, 39, 66, 0.6);
+}
+.cookies[hidden] { display: none; }
+.cookies a { color: var(--dourado); }
+.cookies__botoes { display: flex; gap: 8px; justify-content: flex-end; }
+.cookies__botao {
+  min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer;
+}
+.cookies__botao--sim { background: var(--branco); border-color: var(--branco); color: var(--azul); }
+.com-cookies .barra-whats { bottom: calc(var(--altura-cookies, 140px) + 24px + env(safe-area-inset-bottom)); }
+@media (min-width: 640px) { .cookies { left: auto; width: 420px; } }
 
 /* Páginas de texto (privacidade, termos) */
 .texto { max-width: 780px; padding-top: 36px; padding-bottom: 56px; }

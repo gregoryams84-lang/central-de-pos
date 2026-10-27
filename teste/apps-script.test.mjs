@@ -157,6 +157,10 @@ test('a planilha aceita exatamente os códigos que o site aceita', () => {
   const amostra = ['IG00', 'KW07', 'YT99', 'FBPOS', 'IGCARREIRA', 'AM01', 'AG12', 'TTPOS', 'AX01', 'AM001', 'KW7', 'SITEX', '<script>'];
   for (const c of amostra) assert.equal(app.ctx.CODIGO.test(c), contexto.LINK_CURTO.codigoValido(c) === c, c);
   assert.ok(app.ctx.CODIGO.test('SITE'));
+  // Códigos da campanha paga de 28/10 a 02/11 (Gregory, 27/10).
+  for (const c of ['AM01', 'AM02', 'AM03', 'AM04', 'AG01', 'AG02', 'AG03', 'AG04', 'AG05', 'AG07', 'AG09']) {
+    assert.ok(app.ctx.CODIGO.test(c) && contexto.LINK_CURTO.codigoValido(c) === c, c);
+  }
 });
 
 test('as redes e as áreas aceitas são as mesmas do site', () => {

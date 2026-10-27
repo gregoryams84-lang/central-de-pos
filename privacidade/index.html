@@ -68,7 +68,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .inteiro { white-space: nowrap; }
 a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
 
-/* Cabeçalho: logo oficial + "Central de Pós / Polo parceiro" */
+/* Cabeçalho: logo oficial + "Central de Pós / Polo Anhanguera" */
 .topo { position: sticky; top: 0; z-index: 20; background: var(--branco); border-bottom: 1px solid var(--linha); }
 .topo__dentro { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: var(--largura); margin: 0 auto; min-height: 64px; padding: 10px 20px; }
 .marca { display: flex; align-items: center; gap: 12px; color: var(--texto); text-decoration: none; }
@@ -233,6 +233,24 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 .barra-whats--fora { transform: translateY(140%); opacity: 0; }
 .com-barra { padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
 
+/* Aviso do cookie do Google Ads (só existe com a tag ligada) */
+.cookies {
+  position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 40;
+  display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 16px;
+  background: var(--azul-escuro); color: var(--branco); font-size: 0.9rem; line-height: 1.45;
+  box-shadow: 0 14px 30px -10px rgba(15, 39, 66, 0.6);
+}
+.cookies[hidden] { display: none; }
+.cookies a { color: var(--dourado); }
+.cookies__botoes { display: flex; gap: 8px; justify-content: flex-end; }
+.cookies__botao {
+  min-height: 44px; padding: 0 20px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent; color: inherit; font: inherit; font-weight: 700; cursor: pointer;
+}
+.cookies__botao--sim { background: var(--branco); border-color: var(--branco); color: var(--azul); }
+.com-cookies .barra-whats { bottom: calc(var(--altura-cookies, 140px) + 24px + env(safe-area-inset-bottom)); }
+@media (min-width: 640px) { .cookies { left: auto; width: 420px; } }
+
 /* Páginas de texto (privacidade, termos) */
 .texto { max-width: 780px; padding-top: 36px; padding-bottom: 56px; }
 .texto h1 { font-size: clamp(1.7rem, 6vw, 2.3rem); margin-bottom: 6px; }
@@ -274,13 +292,14 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
 }
 </style>
 
+
 </head>
 <body class="">
 <header class="topo">
   <div class="topo__dentro">
     <a class="marca" href="/">
       <img class="marca__logo" src="/marca/anhanguera.svg" width="102" height="36" alt="Anhanguera">
-      <span class="marca__texto"><strong>Central de Pós</strong><span>Polo parceiro</span></span>
+      <span class="marca__texto"><strong>Central de Pós</strong><span>Polo Anhanguera</span></span>
     </a>
     <a class="topo__whats" data-whats data-posicao="cabecalho" href="https://wa.me/5519992467847?text=Oi!%20Vim%20pelo%20site%20e%20quero%20saber%20da%20p%C3%B3s%20(SITE)" rel="noopener" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span>Falar no WhatsApp</span></a>
   </div>
@@ -317,6 +336,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--laranja); outl
     <p class="rodape__links"><a href="/privacidade/">Privacidade</a><a href="/termos/">Termos de uso</a></p>
   </div>
 </footer>
+
 
 <script>
 /* Monta o link do WhatsApp do Manoel a partir do código da página e do ?c= da URL.
@@ -360,6 +380,7 @@ var LINK_CURTO = (function () {
 (function () {
   var NUMERO = '5519992467847';
   var REGISTRO = '';
+  var CONVERSAO = ''; // "AW-id/rótulo" da conversão do Google Ads, ou vazio sem a tag
   var TRINTA_DIAS = 30 * 24 * 60 * 60 * 1000;
   var REDE_DA_SIGLA = { IG: 'instagram', FB: 'facebook', TT: 'tiktok', KW: 'kwai', YT: 'youtube', AM: 'meta', AG: 'google' };
   var agora = Date.now();
@@ -410,6 +431,9 @@ var LINK_CURTO = (function () {
     }
     if (typeof window.gtag === 'function') {
       try { window.gtag('event', 'whatsapp_clique', { codigo: codigo, area: area, posicao: posicao }); } catch (e) {}
+      if (CONVERSAO) {
+        try { window.gtag('event', 'conversion', { send_to: CONVERSAO }); } catch (e) {}
+      }
     }
   }
 
@@ -478,6 +502,29 @@ var LINK_CURTO = (function () {
       barra.classList.toggle('barra-whats--fora', !!(visiveis.topo || visiveis.final));
     });
     for (var m = 0; m < principais.length; m++) observador.observe(principais[m]);
+  }
+
+  // Aviso do cookie do Google Ads: só existe na página quando a tag está ligada, e some depois da resposta.
+  // Enquanto ele está na tela, a barra do WhatsApp sobe para ficar acima dele.
+  var aviso = document.querySelector('[data-cookies]');
+  var respondeu = null;
+  try { respondeu = localStorage.getItem('cp_cookies'); } catch (e) {}
+  if (aviso && respondeu !== 'sim' && respondeu !== 'nao') {
+    aviso.hidden = false;
+    document.body.classList.add('com-cookies');
+    document.body.style.setProperty('--altura-cookies', aviso.offsetHeight + 'px');
+    var respostas = aviso.querySelectorAll('[data-cookies-resposta]');
+    for (var r = 0; r < respostas.length; r++) {
+      respostas[r].addEventListener('click', function () {
+        var resposta = this.getAttribute('data-cookies-resposta');
+        try { localStorage.setItem('cp_cookies', resposta); } catch (e) {}
+        if (resposta === 'sim' && typeof window.gtag === 'function') {
+          try { window.gtag('consent', 'update', { ad_storage: 'granted', ad_user_data: 'granted' }); } catch (e) {}
+        }
+        aviso.hidden = true;
+        document.body.classList.remove('com-cookies');
+      });
+    }
   }
 
   // ?area=saude (vídeo de área): leva direto ao cartão da área.
