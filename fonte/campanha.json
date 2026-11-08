@@ -1,7 +1,7 @@
 {
-  "_fonte": "Regulamento Outubro da Pós - EAD (itens 2.1, 3.1.2, 3.1.2.1 e 5.2), conferido em 26/10/2026. Trocar de campanha = editar este arquivo e rodar o gerador. Depois do fim, o selo some sozinho.",
-  "nome": "Outubro da Pós",
-  "fim": "2026-11-02T23:59:00-03:00",
+  "_fonte": "Regulamento Outubro da Pós - EAD (itens 2.1, 3.1.2, 3.1.2.1 e 5.2), conferido em 26/10/2026. Prorrogada até 30/11/2026 com as mesmas regras e o mesmo preço (informado pelo Gregory em 08/11). Trocar de campanha = editar este arquivo e rodar o gerador. Depois do fim, o selo some sozinho.",
+  "nome": "Pós em dobro",
+  "fim": "2026-11-30T23:59:00-03:00",
   "ofertas": [
     {
       "icone": "presente",
